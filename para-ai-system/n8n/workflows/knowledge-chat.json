@@ -3,7 +3,7 @@
   "active": false,
   "nodes": [
     {
-      "id": "n1",
+      "id": "a1b2c3d4-0001-4000-8000-000000000001",
       "name": "Chat Trigger",
       "type": "@n8n/n8n-nodes-langchain.chatTrigger",
       "typeVersion": 1.1,
@@ -11,20 +11,20 @@
       "parameters": {
         "options": {}
       },
-      "webhookId": "kb-knowledge-chat"
+      "webhookId": "a1b2c3d4-0001-4000-8000-000000000099"
     },
     {
-      "id": "n2",
+      "id": "a1b2c3d4-0001-4000-8000-000000000002",
       "name": "Load Session",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [420, 300],
       "parameters": {
-        "jsCode": "const item = $input.first().json;\nconst sessionId = item.sessionId;\nconst chatInput = item.chatInput;\n\nif (!$workflow.staticData.sessions) {\n  $workflow.staticData.sessions = {};\n}\nif (!$workflow.staticData.sessions[sessionId]) {\n  $workflow.staticData.sessions[sessionId] = { notebookInput: '', conversation: [] };\n}\n\nconst session = $workflow.staticData.sessions[sessionId];\n\n// 第一則訊息就是使用者貼入的 NotebookLM 內容\nconst isFirstMessage = session.conversation.length === 0;\nif (isFirstMessage) {\n  session.notebookInput = chatInput;\n}\n\nreturn [{ json: {\n  sessionId,\n  chatInput,\n  notebookInput: session.notebookInput,\n  conversation: session.conversation,\n  isFirstMessage\n} }];"
+        "jsCode": "const item = $input.first().json;\nconst sessionId = item.sessionId;\nconst chatInput = item.chatInput;\n\nif (!$workflow.staticData.sessions) {\n  $workflow.staticData.sessions = {};\n}\nif (!$workflow.staticData.sessions[sessionId]) {\n  $workflow.staticData.sessions[sessionId] = { notebookInput: '', conversation: [] };\n}\n\nconst session = $workflow.staticData.sessions[sessionId];\n\nconst isFirstMessage = session.conversation.length === 0;\nif (isFirstMessage) {\n  session.notebookInput = chatInput;\n}\n\nreturn [{ json: {\n  sessionId,\n  chatInput,\n  notebookInput: session.notebookInput,\n  conversation: session.conversation,\n  isFirstMessage\n} }];"
       }
     },
     {
-      "id": "n3",
+      "id": "a1b2c3d4-0001-4000-8000-000000000003",
       "name": "Check Done",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -34,7 +34,7 @@
       }
     },
     {
-      "id": "n4",
+      "id": "a1b2c3d4-0001-4000-8000-000000000004",
       "name": "Route",
       "type": "n8n-nodes-base.if",
       "typeVersion": 2,
@@ -44,7 +44,7 @@
           "options": { "caseSensitive": true, "leftValue": "", "typeValidation": "strict" },
           "conditions": [
             {
-              "id": "c1",
+              "id": "a1b2c3d4-0001-4000-8000-000000000041",
               "leftValue": "={{ $json.isDone }}",
               "operator": { "type": "boolean", "operation": "true" }
             }
@@ -55,7 +55,7 @@
       }
     },
     {
-      "id": "n5a",
+      "id": "a1b2c3d4-0001-4000-8000-000000000005",
       "name": "Build Chat Messages",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -65,7 +65,7 @@
       }
     },
     {
-      "id": "n6a",
+      "id": "a1b2c3d4-0001-4000-8000-000000000006",
       "name": "LLM Chat",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4,
@@ -90,7 +90,7 @@
       }
     },
     {
-      "id": "n7a",
+      "id": "a1b2c3d4-0001-4000-8000-000000000007",
       "name": "Save Chat & Reply",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -100,17 +100,17 @@
       }
     },
     {
-      "id": "n5b",
+      "id": "a1b2c3d4-0001-4000-8000-000000000008",
       "name": "Build Summary Prompt",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [1080, 180],
       "parameters": {
-        "jsCode": "const item = $input.first().json;\nconst { sessionId, notebookInput, conversation } = item;\n\nconst date = new Date().toISOString().split('T')[0];\nconst authorName = process.env.AUTHOR_NAME || 'Unknown';\n\n// 分離使用者自己的問題和模型補充的問題\nconst questionsUser = [];\nconst questionsModel = [];\n// 跳過第一輪（input 貼入 + 模型確認），從第二輪開始\nfor (let i = 2; i < conversation.length; i++) {\n  const m = conversation[i];\n  if (m.role === 'user') questionsUser.push(m.content);\n}\n// 找模型主動提問的段落（包含「？」且是 assistant）\nfor (const m of conversation) {\n  if (m.role === 'assistant' && m.content.includes('？') && m.content.includes('\\n')) {\n    const lines = m.content.split('\\n').filter(l => l.trim().endsWith('？'));\n    questionsModel.push(...lines);\n  }\n}\n\nconst convText = conversation\n  .map(m => `${m.role === 'user' ? '使用者' : '助理'}: ${m.content}`)\n  .join('\\n\\n');\n\nconst prompt = `根據以下對話記錄，整理成指定的 markdown 格式。\n\n對話記錄：\n${convText}\n\n輸出格式（只輸出 markdown，不要加任何說明文字）：\n---\ntitle: [從內容萃取主題標題，不超過 20 字]\ndate: ${date}\nauthor: ${authorName}\nsource: [如果使用者有提到來源則填入，否則留空]\ntags: [從內容萃取 3-5 個繁體中文關鍵字，逗號分隔]\n---\n\n## 摘要\n[NotebookLM input 的核心重點，3-5 句話]\n\n## 我的問題\n[使用者自己提出的問題，條列式]\n\n## 模型補充問題\n[由模型主動提出的問題，條列式，若無則省略此區塊]`;\n\nreturn [{ json: {\n  sessionId,\n  notebookInput,\n  conversation,\n  questionsUser,\n  questionsModel,\n  date,\n  authorName,\n  messages: [{ role: 'user', content: prompt }]\n} }];"
+        "jsCode": "const item = $input.first().json;\nconst { sessionId, notebookInput, conversation } = item;\n\nconst date = new Date().toISOString().split('T')[0];\nconst authorName = process.env.AUTHOR_NAME || 'Unknown';\n\nconst questionsUser = [];\nconst questionsModel = [];\nfor (let i = 2; i < conversation.length; i++) {\n  const m = conversation[i];\n  if (m.role === 'user') questionsUser.push(m.content);\n}\nfor (const m of conversation) {\n  if (m.role === 'assistant' && m.content.includes('？') && m.content.includes('\\n')) {\n    const lines = m.content.split('\\n').filter(l => l.trim().endsWith('？'));\n    questionsModel.push(...lines);\n  }\n}\n\nconst convText = conversation\n  .map(m => `${m.role === 'user' ? '使用者' : '助理'}: ${m.content}`)\n  .join('\\n\\n');\n\nconst prompt = `根據以下對話記錄，整理成指定的 markdown 格式。\n\n對話記錄：\n${convText}\n\n輸出格式（只輸出 markdown，不要加任何說明文字）：\n---\ntitle: [從內容萃取主題標題，不超過 20 字]\ndate: ${date}\nauthor: ${authorName}\nsource: [如果使用者有提到來源則填入，否則留空]\ntags: [從內容萃取 3-5 個繁體中文關鍵字，逗號分隔]\n---\n\n## 摘要\n[NotebookLM input 的核心重點，3-5 句話]\n\n## 我的問題\n[使用者自己提出的問題，條列式]\n\n## 模型補充問題\n[由模型主動提出的問題，條列式，若無則省略此區塊]`;\n\nreturn [{ json: {\n  sessionId,\n  notebookInput,\n  conversation,\n  questionsUser,\n  questionsModel,\n  date,\n  authorName,\n  messages: [{ role: 'user', content: prompt }]\n} }];"
       }
     },
     {
-      "id": "n6b",
+      "id": "a1b2c3d4-0001-4000-8000-000000000009",
       "name": "LLM Format",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4,
@@ -135,13 +135,13 @@
       }
     },
     {
-      "id": "n7b",
+      "id": "a1b2c3d4-0001-4000-8000-000000000010",
       "name": "Write Files & Reply",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [1520, 180],
       "parameters": {
-        "jsCode": "const fs = require('fs');\nconst path = require('path');\n\nconst prev = $('Build Summary Prompt').first().json;\nconst markdownContent = $input.first().json.choices[0].message.content;\n\nconst { sessionId, notebookInput, conversation, questionsUser, questionsModel, date, authorName } = prev;\n\n// 從 frontmatter 取出 title\nconst titleMatch = markdownContent.match(/^title:\\s*(.+)$/m);\nconst rawTitle = titleMatch ? titleMatch[1].trim() : `note-${date}`;\n// 移除不合法的檔名字元\nconst safeTitle = rawTitle.replace(/[\\[\\]\\\\/:*?\"<>|]/g, '-').replace(/\\s+/g, '-');\n\nconst yyyymm = date.slice(0, 7);\n\n// vault 掛載在 /vault（參考 docker-compose.yml）\nconst mdDir = path.join('/vault/notes', yyyymm);\nconst rawDir = path.join('/vault/raw', yyyymm);\n\nfs.mkdirSync(mdDir, { recursive: true });\nfs.mkdirSync(rawDir, { recursive: true });\n\nconst mdPath = path.join(mdDir, safeTitle + '.md');\nconst rawPath = path.join(rawDir, safeTitle + '.json');\n\nconst rawData = {\n  date,\n  author: authorName,\n  input: notebookInput,\n  conversation,\n  questions_by_user: questionsUser,\n  questions_by_model: questionsModel\n};\n\nfs.writeFileSync(mdPath, markdownContent, 'utf8');\nfs.writeFileSync(rawPath, JSON.stringify(rawData, null, 2), 'utf8');\n\n// 清除 session\nif ($workflow.staticData.sessions) {\n  delete $workflow.staticData.sessions[sessionId];\n}\n\nreturn [{ json: { output: `筆記已儲存！\\n\\n📄 ${mdPath}\\n📦 ${rawPath}` } }];"
+        "jsCode": "const fs = require('fs');\nconst path = require('path');\n\nconst prev = $('Build Summary Prompt').first().json;\nconst markdownContent = $input.first().json.choices[0].message.content;\n\nconst { sessionId, notebookInput, conversation, questionsUser, questionsModel, date, authorName } = prev;\n\nconst titleMatch = markdownContent.match(/^title:\\s*(.+)$/m);\nconst rawTitle = titleMatch ? titleMatch[1].trim() : `note-${date}`;\nconst safeTitle = rawTitle.replace(/[\\[\\]\\\\/:*?\"<>|]/g, '-').replace(/\\s+/g, '-');\n\nconst yyyymm = date.slice(0, 7);\n\nconst mdDir = path.join('/vault/notes', yyyymm);\nconst rawDir = path.join('/vault/raw', yyyymm);\n\nfs.mkdirSync(mdDir, { recursive: true });\nfs.mkdirSync(rawDir, { recursive: true });\n\nconst mdPath = path.join(mdDir, safeTitle + '.md');\nconst rawPath = path.join(rawDir, safeTitle + '.json');\n\nconst rawData = {\n  date,\n  author: authorName,\n  input: notebookInput,\n  conversation,\n  questions_by_user: questionsUser,\n  questions_by_model: questionsModel\n};\n\nfs.writeFileSync(mdPath, markdownContent, 'utf8');\nfs.writeFileSync(rawPath, JSON.stringify(rawData, null, 2), 'utf8');\n\nif ($workflow.staticData.sessions) {\n  delete $workflow.staticData.sessions[sessionId];\n}\n\nreturn [{ json: { output: `筆記已儲存！\\n\\n📄 ${mdPath}\\n📦 ${rawPath}` } }];"
       }
     }
   ],
