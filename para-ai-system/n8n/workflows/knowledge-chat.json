@@ -1,0 +1,178 @@
+{
+  "name": "知識萃取對話系統",
+  "active": false,
+  "nodes": [
+    {
+      "id": "n1",
+      "name": "Chat Trigger",
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [200, 300],
+      "parameters": {
+        "options": {}
+      },
+      "webhookId": "kb-knowledge-chat"
+    },
+    {
+      "id": "n2",
+      "name": "Load Session",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [420, 300],
+      "parameters": {
+        "jsCode": "const item = $input.first().json;\nconst sessionId = item.sessionId;\nconst chatInput = item.chatInput;\n\nif (!$workflow.staticData.sessions) {\n  $workflow.staticData.sessions = {};\n}\nif (!$workflow.staticData.sessions[sessionId]) {\n  $workflow.staticData.sessions[sessionId] = { notebookInput: '', conversation: [] };\n}\n\nconst session = $workflow.staticData.sessions[sessionId];\n\n// 第一則訊息就是使用者貼入的 NotebookLM 內容\nconst isFirstMessage = session.conversation.length === 0;\nif (isFirstMessage) {\n  session.notebookInput = chatInput;\n}\n\nreturn [{ json: {\n  sessionId,\n  chatInput,\n  notebookInput: session.notebookInput,\n  conversation: session.conversation,\n  isFirstMessage\n} }];"
+      }
+    },
+    {
+      "id": "n3",
+      "name": "Check Done",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [640, 300],
+      "parameters": {
+        "jsCode": "const item = $input.first().json;\nconst trimmed = item.chatInput.trim();\nconst isDone = trimmed === '完成' || trimmed.toLowerCase() === 'done';\nreturn [{ json: { ...item, isDone } }];"
+      }
+    },
+    {
+      "id": "n4",
+      "name": "Route",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [860, 300],
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": true, "leftValue": "", "typeValidation": "strict" },
+          "conditions": [
+            {
+              "id": "c1",
+              "leftValue": "={{ $json.isDone }}",
+              "operator": { "type": "boolean", "operation": "true" }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "n5a",
+      "name": "Build Chat Messages",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1080, 420],
+      "parameters": {
+        "jsCode": "const item = $input.first().json;\nconst { chatInput, conversation } = item;\n\nconst systemPrompt = `你是一個知識萃取助理。使用者會貼上一段整理好的學習內容。\n你的任務是幫助使用者萃取出有價值的問題。\n\n流程：\n1. 使用者貼上內容後，先簡短確認你理解了內容（1-2句）\n2. 詢問使用者：「你在學習這個主題之前有什麼疑惑，或閱讀過程中冒出什麼問題？」\n3. 使用者回答後繼續追問，直到他說沒有更多問題\n4. 如果使用者說沒有想法，根據內容主動提出 3-5 個有深度的問題給他選擇或修改\n5. 使用者輸入「完成」或「done」時，結束收集\n\n語氣：簡潔、像組員討論，不要太正式。\n語言：跟使用者一樣，預設繁體中文。`;\n\nconst messages = [\n  { role: 'system', content: systemPrompt },\n  ...conversation,\n  { role: 'user', content: chatInput }\n];\n\nreturn [{ json: { ...item, messages } }];"
+      }
+    },
+    {
+      "id": "n6a",
+      "name": "LLM Chat",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1300, 420],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.LLM_BASE_URL }}/chat/completions",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Content-Type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "body": {
+          "model": "={{ $env.LLM_MODEL }}",
+          "messages": "={{ $json.messages }}",
+          "stream": false
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "n7a",
+      "name": "Save Chat & Reply",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1520, 420],
+      "parameters": {
+        "jsCode": "const prev = $('Build Chat Messages').first().json;\nconst assistantReply = $input.first().json.choices[0].message.content;\n\nconst { sessionId, chatInput, notebookInput, conversation } = prev;\n\nconst updatedConversation = [\n  ...conversation,\n  { role: 'user', content: chatInput },\n  { role: 'assistant', content: assistantReply }\n];\n\nif (!$workflow.staticData.sessions) $workflow.staticData.sessions = {};\n$workflow.staticData.sessions[sessionId] = {\n  notebookInput,\n  conversation: updatedConversation\n};\n\nreturn [{ json: { output: assistantReply } }];"
+      }
+    },
+    {
+      "id": "n5b",
+      "name": "Build Summary Prompt",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1080, 180],
+      "parameters": {
+        "jsCode": "const item = $input.first().json;\nconst { sessionId, notebookInput, conversation } = item;\n\nconst date = new Date().toISOString().split('T')[0];\nconst authorName = process.env.AUTHOR_NAME || 'Unknown';\n\n// 分離使用者自己的問題和模型補充的問題\nconst questionsUser = [];\nconst questionsModel = [];\n// 跳過第一輪（input 貼入 + 模型確認），從第二輪開始\nfor (let i = 2; i < conversation.length; i++) {\n  const m = conversation[i];\n  if (m.role === 'user') questionsUser.push(m.content);\n}\n// 找模型主動提問的段落（包含「？」且是 assistant）\nfor (const m of conversation) {\n  if (m.role === 'assistant' && m.content.includes('？') && m.content.includes('\\n')) {\n    const lines = m.content.split('\\n').filter(l => l.trim().endsWith('？'));\n    questionsModel.push(...lines);\n  }\n}\n\nconst convText = conversation\n  .map(m => `${m.role === 'user' ? '使用者' : '助理'}: ${m.content}`)\n  .join('\\n\\n');\n\nconst prompt = `根據以下對話記錄，整理成指定的 markdown 格式。\n\n對話記錄：\n${convText}\n\n輸出格式（只輸出 markdown，不要加任何說明文字）：\n---\ntitle: [從內容萃取主題標題，不超過 20 字]\ndate: ${date}\nauthor: ${authorName}\nsource: [如果使用者有提到來源則填入，否則留空]\ntags: [從內容萃取 3-5 個繁體中文關鍵字，逗號分隔]\n---\n\n## 摘要\n[NotebookLM input 的核心重點，3-5 句話]\n\n## 我的問題\n[使用者自己提出的問題，條列式]\n\n## 模型補充問題\n[由模型主動提出的問題，條列式，若無則省略此區塊]`;\n\nreturn [{ json: {\n  sessionId,\n  notebookInput,\n  conversation,\n  questionsUser,\n  questionsModel,\n  date,\n  authorName,\n  messages: [{ role: 'user', content: prompt }]\n} }];"
+      }
+    },
+    {
+      "id": "n6b",
+      "name": "LLM Format",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1300, 180],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.LLM_BASE_URL }}/chat/completions",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Content-Type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "body": {
+          "model": "={{ $env.LLM_MODEL }}",
+          "messages": "={{ $json.messages }}",
+          "stream": false
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "n7b",
+      "name": "Write Files & Reply",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1520, 180],
+      "parameters": {
+        "jsCode": "const fs = require('fs');\nconst path = require('path');\n\nconst prev = $('Build Summary Prompt').first().json;\nconst markdownContent = $input.first().json.choices[0].message.content;\n\nconst { sessionId, notebookInput, conversation, questionsUser, questionsModel, date, authorName } = prev;\n\n// 從 frontmatter 取出 title\nconst titleMatch = markdownContent.match(/^title:\\s*(.+)$/m);\nconst rawTitle = titleMatch ? titleMatch[1].trim() : `note-${date}`;\n// 移除不合法的檔名字元\nconst safeTitle = rawTitle.replace(/[\\[\\]\\\\/:*?\"<>|]/g, '-').replace(/\\s+/g, '-');\n\nconst yyyymm = date.slice(0, 7);\n\n// vault 掛載在 /vault（參考 docker-compose.yml）\nconst mdDir = path.join('/vault/notes', yyyymm);\nconst rawDir = path.join('/vault/raw', yyyymm);\n\nfs.mkdirSync(mdDir, { recursive: true });\nfs.mkdirSync(rawDir, { recursive: true });\n\nconst mdPath = path.join(mdDir, safeTitle + '.md');\nconst rawPath = path.join(rawDir, safeTitle + '.json');\n\nconst rawData = {\n  date,\n  author: authorName,\n  input: notebookInput,\n  conversation,\n  questions_by_user: questionsUser,\n  questions_by_model: questionsModel\n};\n\nfs.writeFileSync(mdPath, markdownContent, 'utf8');\nfs.writeFileSync(rawPath, JSON.stringify(rawData, null, 2), 'utf8');\n\n// 清除 session\nif ($workflow.staticData.sessions) {\n  delete $workflow.staticData.sessions[sessionId];\n}\n\nreturn [{ json: { output: `筆記已儲存！\\n\\n📄 ${mdPath}\\n📦 ${rawPath}` } }];"
+      }
+    }
+  ],
+  "connections": {
+    "Chat Trigger": {
+      "main": [[{ "node": "Load Session", "type": "main", "index": 0 }]]
+    },
+    "Load Session": {
+      "main": [[{ "node": "Check Done", "type": "main", "index": 0 }]]
+    },
+    "Check Done": {
+      "main": [[{ "node": "Route", "type": "main", "index": 0 }]]
+    },
+    "Route": {
+      "main": [
+        [{ "node": "Build Summary Prompt", "type": "main", "index": 0 }],
+        [{ "node": "Build Chat Messages", "type": "main", "index": 0 }]
+      ]
+    },
+    "Build Summary Prompt": {
+      "main": [[{ "node": "LLM Format", "type": "main", "index": 0 }]]
+    },
+    "LLM Format": {
+      "main": [[{ "node": "Write Files & Reply", "type": "main", "index": 0 }]]
+    },
+    "Build Chat Messages": {
+      "main": [[{ "node": "LLM Chat", "type": "main", "index": 0 }]]
+    },
+    "LLM Chat": {
+      "main": [[{ "node": "Save Chat & Reply", "type": "main", "index": 0 }]]
+    }
+  },
+  "settings": { "executionOrder": "v1" }
+}

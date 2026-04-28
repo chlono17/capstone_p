@@ -1,0 +1,56 @@
+version: "3.8"
+
+volumes:
+  n8n_data:
+
+services:
+  n8n:
+    image: n8nio/n8n:latest
+    container_name: para_n8n
+    restart: unless-stopped
+    ports:
+      - "5678:5678"
+    environment:
+      - N8N_BASIC_AUTH_ACTIVE=true
+      - N8N_BASIC_AUTH_USER=${N8N_USER}
+      - N8N_BASIC_AUTH_PASSWORD=${N8N_PASSWORD}
+      - N8N_ENCRYPTION_KEY=${N8N_ENCRYPTION_KEY}
+      - N8N_SECURE_COOKIE=false
+      - WEBHOOK_URL=http://localhost:5678/
+      - GENERIC_TIMEZONE=Asia/Taipei
+      # LLM backend — points to LM Studio (or Ollama) on the host machine
+      - LLM_BASE_URL=${LLM_BASE_URL}
+      - LLM_MODEL=${LLM_MODEL}
+      # Claude API (used by notes-to-podcast workflow)
+      - CLAUDE_API_KEY=${CLAUDE_API_KEY}
+      # TTS (used by notes-to-podcast workflow)
+      - TTS_API_KEY=${TTS_API_KEY}
+      - TTS_API_URL=${TTS_API_URL}
+      # Knowledge-chat workflow
+      - AUTHOR_NAME=${AUTHOR_NAME}
+    volumes:
+      - n8n_data:/home/node/.n8n
+      - ./n8n/workflows:/import/workflows:ro
+      # vault is mounted so n8n can write notes into it
+      - ./vault:/vault:rw
+    env_file:
+      - .env
+
+  # One-shot workflow importer — run with:
+  # docker compose --profile import up n8n-import
+  n8n-import:
+    image: n8nio/n8n:latest
+    container_name: para_n8n_import
+    entrypoint: /bin/sh
+    command:
+      - "-c"
+      - "sleep 3 && n8n import:workflow --separate --input=/import/workflows && echo 'Import done.'"
+    volumes:
+      - n8n_data:/home/node/.n8n
+      - ./n8n/workflows:/import/workflows:ro
+    env_file:
+      - .env
+    profiles:
+      - import
+    depends_on:
+      - n8n

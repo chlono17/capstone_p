@@ -1,0 +1,7 @@
+.env
+.DS_Store
+n8n_data/
+*.mp3
+*.mp4
+__pycache__/
+para-ai-system/vault/raw/

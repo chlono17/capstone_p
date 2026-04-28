@@ -1,0 +1,196 @@
+{
+  "name": "Notes → English Article → Podcast",
+  "active": false,
+  "nodes": [
+    {
+      "id": "node_trigger",
+      "name": "Watch Inbox Folder",
+      "type": "n8n-nodes-base.localFileTrigger",
+      "typeVersion": 1,
+      "position": [200, 300],
+      "parameters": {
+        "path": "/data/para/01_Projects",
+        "recursive": true,
+        "events": ["add"],
+        "filter": {
+          "includePatterns": ["**/inbox/*.md"]
+        },
+        "options": {
+          "usePolling": true,
+          "pollingInterval": 5
+        }
+      }
+    },
+    {
+      "id": "node_read_file",
+      "name": "Read Note File",
+      "type": "n8n-nodes-base.readBinaryFile",
+      "typeVersion": 1,
+      "position": [420, 300],
+      "parameters": {
+        "filePath": "={{ $json.path }}"
+      }
+    },
+    {
+      "id": "node_extract_text",
+      "name": "Extract Text Content",
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [640, 300],
+      "parameters": {
+        "operation": "text",
+        "binaryPropertyName": "data"
+      }
+    },
+    {
+      "id": "node_claude",
+      "name": "Claude: Notes → Article",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [860, 300],
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.anthropic.com/v1/messages",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "x-api-key", "value": "={{ $env.CLAUDE_API_KEY }}" },
+            { "name": "anthropic-version", "value": "2023-06-01" },
+            { "name": "content-type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "body": {
+          "model": "claude-opus-4-5",
+          "max_tokens": 4096,
+          "messages": [
+            {
+              "role": "user",
+              "content": "=You are an expert English writer and educator. The author's rough notes below may be in any language (likely Chinese or English). Your task:\n1. Understand the core ideas and insights in the notes.\n2. Transform them into a polished, publication-ready English article with clear structure: introduction, body paragraphs, conclusion.\n3. Keep the author's voice and intent. Do not add information not present in the notes.\n4. Output ONLY the article text — no meta-commentary, no preamble.\n\n---\n{{ $json.text.slice(0, 100000) }}"
+            }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "node_set_article",
+      "name": "Extract Article Text",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3,
+      "position": [1080, 300],
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "name": "articleText",
+              "value": "={{ $json.content[0].text }}",
+              "type": "string"
+            },
+            {
+              "name": "sourcePath",
+              "value": "={{ $('Watch Inbox Folder').item.json.path }}",
+              "type": "string"
+            },
+            {
+              "name": "articlePath",
+              "value": "={{ $('Watch Inbox Folder').item.json.path.replace('/inbox/', '/').replace(/\\.md$/, '-article.md') }}",
+              "type": "string"
+            },
+            {
+              "name": "podcastPath",
+              "value": "={{ $('Watch Inbox Folder').item.json.path.replace('/inbox/', '/').replace(/\\.md$/, '-podcast.mp3') }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "node_write_article",
+      "name": "Write Article File",
+      "type": "n8n-nodes-base.writeFile",
+      "typeVersion": 1,
+      "position": [1300, 200],
+      "parameters": {
+        "filePath": "={{ $json.articlePath }}",
+        "dataPropertyName": "articleText",
+        "encoding": "utf8"
+      }
+    },
+    {
+      "id": "node_tts",
+      "name": "TTS: Article → Podcast",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1300, 400],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.TTS_API_URL }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "xi-api-key", "value": "={{ $env.TTS_API_KEY }}" },
+            { "name": "content-type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "body": {
+          "text": "={{ $('Extract Article Text').item.json.articleText.slice(0, 5000) }}",
+          "model_id": "eleven_multilingual_v2",
+          "voice_settings": {
+            "stability": 0.5,
+            "similarity_boost": 0.75
+          }
+        },
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file"
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "node_write_podcast",
+      "name": "Write Podcast File",
+      "type": "n8n-nodes-base.writeBinaryFile",
+      "typeVersion": 1,
+      "position": [1520, 400],
+      "parameters": {
+        "filePath": "={{ $('Extract Article Text').item.json.podcastPath }}",
+        "dataPropertyName": "data"
+      }
+    }
+  ],
+  "connections": {
+    "Watch Inbox Folder": {
+      "main": [[{ "node": "Read Note File", "type": "main", "index": 0 }]]
+    },
+    "Read Note File": {
+      "main": [[{ "node": "Extract Text Content", "type": "main", "index": 0 }]]
+    },
+    "Extract Text Content": {
+      "main": [[{ "node": "Claude: Notes → Article", "type": "main", "index": 0 }]]
+    },
+    "Claude: Notes → Article": {
+      "main": [[{ "node": "Extract Article Text", "type": "main", "index": 0 }]]
+    },
+    "Extract Article Text": {
+      "main": [[
+        { "node": "Write Article File", "type": "main", "index": 0 },
+        { "node": "TTS: Article → Podcast", "type": "main", "index": 0 }
+      ]]
+    },
+    "TTS: Article → Podcast": {
+      "main": [[{ "node": "Write Podcast File", "type": "main", "index": 0 }]]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}
