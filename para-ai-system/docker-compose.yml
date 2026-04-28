@@ -18,6 +18,8 @@ services:
       - GENERIC_TIMEZONE=Asia/Taipei
       # Allow nodes to read environment variables via $env
       - N8N_BLOCK_ENV_ACCESS_IN_NODE=false
+      # Allow fs and path modules in Code nodes
+      - NODE_FUNCTION_ALLOW_BUILTIN=fs,path
       # LLM backend — points to LM Studio (or Ollama) on the host machine
       - LLM_BASE_URL=${LLM_BASE_URL}
       - LLM_MODEL=${LLM_MODEL}
