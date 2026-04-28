@@ -73,19 +73,10 @@
       "parameters": {
         "method": "POST",
         "url": "={{ $env.LLM_BASE_URL }}/chat/completions",
-        "sendHeaders": true,
-        "headerParameters": {
-          "parameters": [
-            { "name": "Content-Type", "value": "application/json" }
-          ]
-        },
         "sendBody": true,
-        "contentType": "json",
-        "body": {
-          "model": "={{ $env.LLM_MODEL }}",
-          "messages": "={{ $json.messages }}",
-          "stream": false
-        },
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={{ JSON.stringify({ model: $env.LLM_MODEL, messages: $json.messages, stream: false }) }}",
         "options": {}
       }
     },
@@ -118,19 +109,10 @@
       "parameters": {
         "method": "POST",
         "url": "={{ $env.LLM_BASE_URL }}/chat/completions",
-        "sendHeaders": true,
-        "headerParameters": {
-          "parameters": [
-            { "name": "Content-Type", "value": "application/json" }
-          ]
-        },
         "sendBody": true,
-        "contentType": "json",
-        "body": {
-          "model": "={{ $env.LLM_MODEL }}",
-          "messages": "={{ $json.messages }}",
-          "stream": false
-        },
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={{ JSON.stringify({ model: $env.LLM_MODEL, messages: $json.messages, stream: false }) }}",
         "options": {}
       }
     },
