@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "28966124c27a67e7",
+        "id": "6704d9560e1da319",
         "type": "tabs",
         "children": [
           {
-            "id": "9fc86e04598674fe",
+            "id": "c3ea15884763d229",
             "type": "leaf",
             "state": {
               "type": "empty",
@@ -173,9 +173,10 @@
       "daily-notes:Open today's daily note": false,
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
-      "bases:Create new base": false
+      "bases:Create new base": false,
+      "obsidian-git:Open Git source control": false
     }
   },
-  "active": "9fc86e04598674fe",
+  "active": "dfd999effc39e0e2",
   "lastOpenFiles": []
 }
