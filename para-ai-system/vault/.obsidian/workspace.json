@@ -11,14 +11,10 @@
             "id": "c3ea15884763d229",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "notes/2026-04/--notebooklm-input-的核心重點-.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "--notebooklm-input-的核心重點-"
+              "title": "New tab"
             }
           }
         ]
@@ -186,8 +182,8 @@
   },
   "active": "c3ea15884763d229",
   "lastOpenFiles": [
-    "notes/2026-04/note-2026-04-29.md",
     "notes/2026-04/--notebooklm-input-的核心重點-.md",
+    "notes/2026-04/note-2026-04-29.md",
     "notes/2026-04/notebookLM.md",
     "notes/2026-04/進一步-refinement-NotebookLM-模型.md",
     "raw/2026-04/進一步-refinement-NotebookLM-模型.json",

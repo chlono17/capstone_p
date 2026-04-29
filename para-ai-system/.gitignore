@@ -5,4 +5,5 @@ n8n_data/
 .DS_Store
 __pycache__/
 vault/raw/
+vault/notes/.obsidian/
 
