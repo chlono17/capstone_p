@@ -11,10 +11,14 @@
             "id": "f4865d471b3b26c0",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "notes/2026-04/讓Claude-Code更有效率的四個核心設定.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "New tab"
+              "title": "讓Claude-Code更有效率的四個核心設定"
             }
           }
         ]
@@ -182,6 +186,10 @@
   },
   "active": "f4865d471b3b26c0",
   "lastOpenFiles": [
+    "raw/2026-04/讓Claude-Code更有效率的四個核心設定.json",
+    "notes/2026-04/讓Claude-Code更有效率的四個核心設定.md",
+    "raw/sessions/f322e9b33c3c4b028cb65000964c9bcf.json",
+    "raw/sessions",
     "notes/2026-04/notebookLM.md",
     "notes/2026-04/進一步-refinement-NotebookLM-模型.md",
     "notes/2026-04/--notebooklm-input-的核心重點-.md",
