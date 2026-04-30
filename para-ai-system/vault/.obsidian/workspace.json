@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "notes/2026-04/CLAUDE設定指南精簡版.md",
+                "file": "notes/2026-04/如何管理Claude的工作細節與進度.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "CLAUDE設定指南精簡版"
+              "title": "如何管理Claude的工作細節與進度"
             }
           }
         ]
@@ -187,7 +187,10 @@
   "active": "474499a4ffda01fb",
   "lastOpenFiles": [
     "notes/2026-04/讓Claude-Code更有效率的四個核心設定.md",
+    "notes/2026-04/如何管理Claude的工作細節與進度.md",
     "notes/2026-04/CLAUDE設定指南精簡版.md",
+    "raw/2026-04/如何管理Claude的工作細節與進度.json",
+    "raw/sessions/6fc87f4ea154411ea6b5d281f3688c3e.json",
     "raw/2026-04/CLAUDE設定指南精簡版.json",
     "raw/sessions/8b712194111643318f8915ec059f3d37.json",
     "raw/sessions/7bf3913774b946288ca8059f86374367.json",
@@ -199,8 +202,6 @@
     "notes/2026-04/notebookLM.md",
     "notes/2026-04/進一步-refinement-NotebookLM-模型.md",
     "notes/2026-04/--notebooklm-input-的核心重點-.md",
-    "notes/2026-04/note-2026-04-29.md",
-    "raw/2026-04/進一步-refinement-NotebookLM-模型.json",
-    "raw/2026-04/--notebooklm-input-的核心重點-.json"
+    "notes/2026-04/note-2026-04-29.md"
   ]
 }
