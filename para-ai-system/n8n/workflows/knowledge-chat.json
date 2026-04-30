@@ -7,8 +7,13 @@
       "name": "Chat Trigger",
       "type": "@n8n/n8n-nodes-langchain.chatTrigger",
       "typeVersion": 1.1,
-      "position": [200, 300],
-      "parameters": { "options": {} },
+      "position": [
+        200,
+        300
+      ],
+      "parameters": {
+        "options": {}
+      },
       "webhookId": "a1b2c3d4-0001-4000-8000-000000000099"
     },
     {
@@ -16,7 +21,10 @@
       "name": "Load Session",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
-      "position": [420, 300],
+      "position": [
+        420,
+        300
+      ],
       "parameters": {
         "jsCode": "const fs = require('fs');\nconst path = require('path');\n\nconst item = $input.first().json;\nconst sessionId = item.sessionId;\nconst chatInput = item.chatInput;\n\nconst sessionsDir = '/vault/raw/sessions';\nconst sessionFile = path.join(sessionsDir, sessionId + '.json');\n\nlet session = { notebookInput: '', conversation: [], source: '' };\n\nif (fs.existsSync(sessionFile)) {\n  try {\n    session = JSON.parse(fs.readFileSync(sessionFile, 'utf8'));\n  } catch(e) {\n    session = { notebookInput: '', conversation: [], source: '' };\n  }\n}\n\nconst isFirstMessage = session.conversation.length === 0;\nif (isFirstMessage) {\n  session.notebookInput = chatInput;\n  fs.mkdirSync(sessionsDir, { recursive: true });\n  fs.writeFileSync(sessionFile, JSON.stringify(session, null, 2), 'utf8');\n}\n\nreturn [{ json: {\n  sessionId,\n  chatInput,\n  notebookInput: session.notebookInput,\n  conversation: session.conversation,\n  source: session.source || '',\n  isFirstMessage\n} }];"
       }
@@ -26,7 +34,10 @@
       "name": "Check Done",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
-      "position": [640, 300],
+      "position": [
+        640,
+        300
+      ],
       "parameters": {
         "jsCode": "const item = $input.first().json;\nconst trimmed = item.chatInput.trim();\nconst isDone = trimmed.startsWith('完成') || trimmed.toLowerCase().startsWith('done');\n\nlet source = item.source || '';\nif (!source) {\n  const idx = trimmed.indexOf('http');\n  if (idx >= 0) source = trimmed.slice(idx).split(' ')[0];\n}\n\nreturn [{ json: { ...item, isDone, source } }];"
       }
@@ -36,15 +47,25 @@
       "name": "Route",
       "type": "n8n-nodes-base.if",
       "typeVersion": 2,
-      "position": [860, 300],
+      "position": [
+        860,
+        300
+      ],
       "parameters": {
         "conditions": {
-          "options": { "caseSensitive": true, "leftValue": "", "typeValidation": "strict" },
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
           "conditions": [
             {
               "id": "a1b2c3d4-0001-4000-8000-000000000041",
               "leftValue": "={{ $json.isDone }}",
-              "operator": { "type": "boolean", "operation": "true" }
+              "operator": {
+                "type": "boolean",
+                "operation": "true"
+              }
             }
           ],
           "combinator": "and"
@@ -57,9 +78,12 @@
       "name": "Build Chat Messages",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
-      "position": [1080, 420],
+      "position": [
+        1080,
+        420
+      ],
       "parameters": {
-        "jsCode": "const item = $input.first().json;\nconst { chatInput, conversation } = item;\n\nconst systemPrompt = `你是一個知識萃取助理。使用者會貼上一段整理好的學習內容。\n你的任務是幫助使用者萃取出有價值的問題。\n\n流程：\n1. 使用者貼上內容後，先簡短確認你理解了內容（1-2句）\n2. 詢問使用者：「你在學習這個主題之前有什麼疑惑，或閱讀過程中冒出什麼問題？」\n3. 使用者回答後繼續追問，直到他說沒有更多問題\n4. 如果使用者說沒有想法，根據內容主動提出 3-5 個有深度的問題給他選擇或修改\n5. 使用者輸入「完成」時結束；若有來源可以一起提供，例如：完成 https://example.com\n\n語氣：簡潔、像組員討論，不要太正式。\n語言：跟使用者一樣，預設繁體中文。`;\n\nconst messages = [\n  { role: 'system', content: systemPrompt },\n  ...conversation,\n  { role: 'user', content: chatInput }\n];\n\nreturn [{ json: { ...item, messages } }];"
+        "jsCode": "const item = $input.first().json;\nconst { chatInput, conversation } = item;\n\nconst systemPrompt = `你是一個知識萃取助理。使用者會貼上一段整理好的學習內容。\n你的任務是幫助使用者萃取出有價值的問題。\n\n流程：\n1. 使用者貼上內容後，先簡短確認你理解了內容（1-2句）\n2. 詢問使用者：「你在學習這個主題之前有什麼疑惑，或閱讀過程中冒出什麼問題？」\n3. 使用者回答後繼續追問，直到他說沒有更多問題\n4. 如果使用者說沒有想法，根據內容主動提出 3-5 個有深度的問題。\n   重要：這些問題必須只針對這份內容才有意義，換一篇文章就問不出來的那種。\n   好問題範例（針對 CLAUDE.md 文章）：「CLAUDE.md 超過 200 行後怎麼處理比較好？」「Hooks 和 Rules 的界線怎麼判斷？」\n   不好的問題範例：「你覺得這個方法有什麼限制？」「這對你有幫助嗎？」\n5. 使用者輸入「完成」時結束；若有來源可以一起提供，例如：完成 https://example.com\n\n語氣：簡潔、像組員討論，不要太正式。\n語言：全程使用繁體中文，不可使用簡體字。`;\n\nconst messages = [\n  { role: 'system', content: systemPrompt },\n  ...conversation,\n  { role: 'user', content: chatInput }\n];\n\nreturn [{ json: { ...item, messages } }];"
       }
     },
     {
@@ -67,7 +91,10 @@
       "name": "LLM Chat",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4,
-      "position": [1300, 420],
+      "position": [
+        1300,
+        420
+      ],
       "parameters": {
         "method": "POST",
         "url": "={{ $env.LLM_BASE_URL }}/chat/completions",
@@ -83,7 +110,10 @@
       "name": "Save Chat & Reply",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
-      "position": [1520, 420],
+      "position": [
+        1520,
+        420
+      ],
       "parameters": {
         "jsCode": "const fs = require('fs');\nconst path = require('path');\n\nconst prev = $('Build Chat Messages').first().json;\nconst assistantReply = $input.first().json.choices[0].message.content;\n\nconst { sessionId, chatInput, notebookInput, conversation } = prev;\nlet source = prev.source || '';\n\nif (!source) {\n  const idx = chatInput.indexOf('http');\n  if (idx >= 0) source = chatInput.slice(idx).split(' ')[0];\n}\n\nconst updatedConversation = [\n  ...conversation,\n  { role: 'user', content: chatInput },\n  { role: 'assistant', content: assistantReply }\n];\n\nconst sessionFile = path.join('/vault/raw/sessions', sessionId + '.json');\nfs.writeFileSync(sessionFile, JSON.stringify({\n  notebookInput,\n  conversation: updatedConversation,\n  source\n}, null, 2), 'utf8');\n\nreturn [{ json: { output: assistantReply } }];"
       }
@@ -93,9 +123,12 @@
       "name": "Build Summary Prompt",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
-      "position": [1080, 180],
+      "position": [
+        1080,
+        180
+      ],
       "parameters": {
-        "jsCode": "const item = $input.first().json;\nconst { sessionId, notebookInput, conversation, source } = item;\n\nif (!conversation || conversation.length < 2) {\n  return [{ json: {\n    sessionId,\n    notebookInput: notebookInput || '',\n    conversation: [],\n    questionsUser: [],\n    questionsModel: [],\n    date: new Date().toISOString().split('T')[0],\n    authorName: $env.AUTHOR_NAME || 'Unknown',\n    modelName: $env.LLM_MODEL || 'Unknown',\n    source: source || '',\n    isEmpty: true,\n    messages: [{ role: 'user', content: 'OUTPUT_EMPTY_SESSION' }]\n  }}];\n}\n\nconst date = new Date().toISOString().split('T')[0];\nconst authorName = $env.AUTHOR_NAME || 'Unknown';\nconst modelName = $env.LLM_MODEL || 'Unknown';\n\nconst questionsUser = [];\nconst questionsModel = [];\nfor (let i = 2; i < conversation.length; i++) {\n  if (conversation[i].role === 'user') questionsUser.push(conversation[i].content);\n}\nfor (const m of conversation) {\n  if (m.role === 'assistant' && m.content.includes('？') && m.content.includes('\\n')) {\n    const lines = m.content.split('\\n').filter(l => l.trim().endsWith('？'));\n    questionsModel.push(...lines);\n  }\n}\n\nconst convText = conversation\n  .map(m => `${m.role === 'user' ? '使用者' : '助理'}: ${m.content}`)\n  .join('\\n\\n');\n\nconst sourceField = source ? source : '';\n\nconst prompt = `你的任務是將以下對話記錄整理成一份 Markdown 筆記。\\n\\n重要規則：\\n1. 全文使用繁體中文\\n2. 只輸出 Markdown 內容本身，在開頭之前與結尾之後不可加任何文字、說明或問候語\\n3. 嚴格按照下方格式，不可新增、刪除或重新命名任何區塊\\n\\n${source ? '來源：' + source + '\\n\\n' : ''}對話記錄：\\n${convText}\\n\\n輸出格式（將 <佔位符> 替換成實際內容）：\\n---\\ntitle: <主題標題，不超過 20 字>\\ndate: ${date}\\nauthor: ${authorName}\\nmodel: ${modelName}\\nsource: ${sourceField}\\ntags:\\n  - <關鍵字1>\\n  - <關鍵字2>\\n  - <關鍵字3>\\n---\\n\\n## 摘要\\n<核心重點，3-5 句話>\\n\\n## 我的問題\\n- <使用者提出的問題1>\\n- <使用者提出的問題2>\\n\\n## 模型補充問題\\n- <模型提出的問題1>\\n\\n（若模型沒有提出問題，則完整省略「## 模型補充問題」區塊，包含標題行）`;\n\nreturn [{ json: {\n  sessionId, notebookInput, conversation,\n  questionsUser, questionsModel,\n  date, authorName, modelName,\n  source: sourceField,\n  isEmpty: false,\n  messages: [{ role: 'user', content: prompt }]\n}}];"
+        "jsCode": "const item = $input.first().json;\nconst { sessionId, notebookInput, conversation, source } = item;\n\nif (!conversation || conversation.length < 2) {\n  return [{ json: {\n    sessionId,\n    notebookInput: notebookInput || '',\n    conversation: [],\n    questionsUser: [],\n    questionsModel: [],\n    date: new Date().toISOString().split('T')[0],\n    authorName: $env.AUTHOR_NAME || 'Unknown',\n    modelName: $env.LLM_MODEL || 'Unknown',\n    source: source || '',\n    isEmpty: true,\n    messages: [{ role: 'user', content: 'OUTPUT_EMPTY_SESSION' }]\n  }}];\n}\n\nconst date = new Date().toISOString().split('T')[0];\nconst authorName = $env.AUTHOR_NAME || 'Unknown';\nconst modelName = $env.LLM_MODEL || 'Unknown';\n\nconst questionsUser = [];\nfor (let i = 2; i < conversation.length; i++) {\n  if (conversation[i].role === 'user') questionsUser.push(conversation[i].content);\n}\nconst questionsModel = [];\nfor (const m of conversation) {\n  if (m.role === 'assistant') {\n    const sentences = m.content.split(/(?<=[。？！])/).filter(s => s.includes('？') && s.trim().length > 8);\n    questionsModel.push(...sentences);\n  }\n}\n\nconst inputText = conversation[0].content;\nconst dialogueText = conversation.slice(1)\n  .map(m => `${m.role === 'user' ? '使用者' : '助理'}: ${m.content}`)\n  .join('\\n\\n');\n\nconst sourceField = source ? source : '';\n\nconst prompt = `你的任務是根據以下資料，整理成一份高品質的學習筆記。\n全文必須使用繁體中文，對話中若有簡體字一律轉換為繁體中文輸出。\n\n【原始學習內容】\n${inputText}\n\n【問題萃取對話】\n${dialogueText}\n\n輸出格式（規則：只輸出 markdown 本體，不要加任何說明文字，不要加「請確認」「如需調整」等句子，不要在最後加分隔線或結語）：\n---\ntitle: [從內容萃取主題標題，不超過 20 字]\ndate: ${date}\nauthor: ${authorName}\nmodel: ${modelName}\nsource: ${sourceField}\ntags:\n  - [關鍵字1]\n  - [關鍵字2]\n  - [關鍵字3，以此類推，共 3-5 個繁體中文關鍵字，每個獨立一行]\n---\n\n## 摘要\n[根據原始學習內容寫 5-8 句。重點是「如何實際操作這些知識」：要有具體步驟、數值、判斷條件。不能只列概念名稱，每句都要有實際資訊量，讓人讀完就知道怎麼做。]\n\n## 問答\n[根據「問題萃取對話」中使用者提出的每一個問題，直接從原始學習內容找答案。\n\n格式（每題都要有答案，不能只列問題）：\n\n**Q: [使用者問題原文]**\n[具體答案 2-4 句，必須引用原始內容的細節，不能說「可以根據需求調整」這類廢話]\n]\n\n## 模型補充問答\n[若對話中助理主動提出問題，用相同格式列出並從原始內容回答。若無則完全省略此區塊，連標題都不要寫。]`;\n\nreturn [{ json: {\n  sessionId, notebookInput, conversation,\n  questionsUser, questionsModel,\n  date, authorName, modelName,\n  source: sourceField,\n  isEmpty: false,\n  messages: [{ role: 'user', content: prompt }]\n}}];"
       }
     },
     {
@@ -103,7 +136,10 @@
       "name": "LLM Format",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4,
-      "position": [1300, 180],
+      "position": [
+        1300,
+        180
+      ],
       "parameters": {
         "method": "POST",
         "url": "={{ $env.LLM_BASE_URL }}/chat/completions",
@@ -119,40 +155,113 @@
       "name": "Write Files & Reply",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
-      "position": [1520, 180],
+      "position": [
+        1520,
+        180
+      ],
       "parameters": {
-        "jsCode": "const fs = require('fs');\nconst path = require('path');\n\nconst prev = $('Build Summary Prompt').first().json;\nconst markdownContent = $input.first().json.choices[0].message.content;\n\nif (prev.isEmpty || markdownContent.includes('OUTPUT_EMPTY_SESSION')) {\n  return [{ json: { output: '⚠️ 對話記錄不足，無法整理。\\n\\n請重新開始：貼入 NotebookLM 內容 → 與模型對話 → 最後輸入「完成」。' }}];\n}\n\nconst { sessionId, notebookInput, conversation, questionsUser, questionsModel, date, authorName, modelName, source } = prev;\n\nconst titleMatch = markdownContent.match(/^title:\\s*(.+)$/m);\nconst rawTitle = titleMatch ? titleMatch[1].trim() : `note-${date}`;\nconst safeTitle = rawTitle.replace(/[\\[\\]\\\\/:*?\"<>|]/g, '-').replace(/\\s+/g, '-');\n\nconst yyyymm = date.slice(0, 7);\nconst mdDir = path.join('/vault/notes', yyyymm);\nconst rawDir = path.join('/vault/raw', yyyymm);\n\nfs.mkdirSync(mdDir, { recursive: true });\nfs.mkdirSync(rawDir, { recursive: true });\n\nconst mdPath = path.join(mdDir, safeTitle + '.md');\nconst rawPath = path.join(rawDir, safeTitle + '.json');\n\nconst rawData = {\n  date, author: authorName, model: modelName,\n  source: source || '',\n  input: notebookInput, conversation,\n  questions_by_user: questionsUser,\n  questions_by_model: questionsModel\n};\n\nfs.writeFileSync(mdPath, markdownContent, 'utf8');\nfs.writeFileSync(rawPath, JSON.stringify(rawData, null, 2), 'utf8');\n\nconst sessionFile = path.join('/vault/raw/sessions', sessionId + '.json');\ntry { fs.unlinkSync(sessionFile); } catch(e) {}\n\nreturn [{ json: { output: `筆記已儲存！\\n\\n📄 ${mdPath}\\n📦 ${rawPath}` }}];"
+        "jsCode": "const fs = require('fs');\nconst path = require('path');\n\nconst prev = $('Build Summary Prompt').first().json;\nconst rawContent = $input.first().json.choices[0].message.content;\n\nif (prev.isEmpty || rawContent.includes('OUTPUT_EMPTY_SESSION')) {\n  return [{ json: { output: '⚠️ 對話記錄不足，無法整理。\\n\\n請重新開始：貼入 NotebookLM 內容 → 與模型對話 → 最後輸入「完成」。' }}];\n}\n\nconst { sessionId, notebookInput, conversation, questionsUser, questionsModel, date, authorName, modelName, source } = prev;\n\n// 強制修正模型可能填錯的 metadata，不論模型寫什麼都以 code 層為準\nconst markdownContent = rawContent\n  .replace(/^date:.*$/m, `date: ${date}`)\n  .replace(/^author:.*$/m, `author: ${authorName}`)\n  .replace(/^model:.*$/m, `model: ${modelName}`);\n\nconst titleMatch = markdownContent.match(/^title:\\s*(.+)$/m);\nconst rawTitle = titleMatch ? titleMatch[1].trim() : `note-${date}`;\nconst safeTitle = rawTitle.replace(/[\\[\\]\\\\/:*?\"<>|]/g, '-').replace(/\\s+/g, '-');\n\nconst yyyymm = date.slice(0, 7);\nconst mdDir = path.join('/vault/notes', yyyymm);\nconst rawDir = path.join('/vault/raw', yyyymm);\n\nfs.mkdirSync(mdDir, { recursive: true });\nfs.mkdirSync(rawDir, { recursive: true });\n\nconst mdPath = path.join(mdDir, safeTitle + '.md');\nconst rawPath = path.join(rawDir, safeTitle + '.json');\n\nconst rawData = {\n  date, author: authorName, model: modelName,\n  source: source || '',\n  input: notebookInput, conversation,\n  questions_by_user: questionsUser,\n  questions_by_model: questionsModel\n};\n\nfs.writeFileSync(mdPath, markdownContent, 'utf8');\nfs.writeFileSync(rawPath, JSON.stringify(rawData, null, 2), 'utf8');\n\nconst sessionFile = path.join('/vault/raw/sessions', sessionId + '.json');\ntry { fs.unlinkSync(sessionFile); } catch(e) {}\n\nreturn [{ json: { output: `筆記已儲存！\\n\\n📄 ${mdPath}\\n📦 ${rawPath}` }}];"
       }
     }
   ],
   "connections": {
     "Chat Trigger": {
-      "main": [[{ "node": "Load Session", "type": "main", "index": 0 }]]
+      "main": [
+        [
+          {
+            "node": "Load Session",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     },
     "Load Session": {
-      "main": [[{ "node": "Check Done", "type": "main", "index": 0 }]]
+      "main": [
+        [
+          {
+            "node": "Check Done",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     },
     "Check Done": {
-      "main": [[{ "node": "Route", "type": "main", "index": 0 }]]
+      "main": [
+        [
+          {
+            "node": "Route",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     },
     "Route": {
       "main": [
-        [{ "node": "Build Summary Prompt", "type": "main", "index": 0 }],
-        [{ "node": "Build Chat Messages", "type": "main", "index": 0 }]
+        [
+          {
+            "node": "Build Summary Prompt",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Build Chat Messages",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "Build Summary Prompt": {
-      "main": [[{ "node": "LLM Format", "type": "main", "index": 0 }]]
+      "main": [
+        [
+          {
+            "node": "LLM Format",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     },
     "LLM Format": {
-      "main": [[{ "node": "Write Files & Reply", "type": "main", "index": 0 }]]
+      "main": [
+        [
+          {
+            "node": "Write Files & Reply",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     },
     "Build Chat Messages": {
-      "main": [[{ "node": "LLM Chat", "type": "main", "index": 0 }]]
+      "main": [
+        [
+          {
+            "node": "LLM Chat",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     },
     "LLM Chat": {
-      "main": [[{ "node": "Save Chat & Reply", "type": "main", "index": 0 }]]
+      "main": [
+        [
+          {
+            "node": "Save Chat & Reply",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
-  "settings": { "executionOrder": "v1" }
+  "settings": {
+    "executionOrder": "v1"
+  }
 }
