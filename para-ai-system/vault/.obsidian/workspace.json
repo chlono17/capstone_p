@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "6704d9560e1da319",
+        "id": "1ac729566858390d",
         "type": "tabs",
         "children": [
           {
-            "id": "c3ea15884763d229",
+            "id": "f4865d471b3b26c0",
             "type": "leaf",
             "state": {
               "type": "empty",
@@ -180,12 +180,12 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "c3ea15884763d229",
+  "active": "f4865d471b3b26c0",
   "lastOpenFiles": [
-    "notes/2026-04/--notebooklm-input-的核心重點-.md",
-    "notes/2026-04/note-2026-04-29.md",
     "notes/2026-04/notebookLM.md",
     "notes/2026-04/進一步-refinement-NotebookLM-模型.md",
+    "notes/2026-04/--notebooklm-input-的核心重點-.md",
+    "notes/2026-04/note-2026-04-29.md",
     "raw/2026-04/進一步-refinement-NotebookLM-模型.json",
     "raw/2026-04/--notebooklm-input-的核心重點-.json",
     "raw/2026-04/notebookLM.json",
