@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "notes/2026-04/CLAUDE設定指南：從基礎到高階應用.md",
+                "file": "notes/2026-05/RAG-vs.-微調：實際應用指南.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "CLAUDE設定指南：從基礎到高階應用"
+              "title": "RAG-vs.-微調：實際應用指南"
             }
           }
         ]
@@ -184,11 +184,11 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "474499a4ffda01fb",
+  "active": "dfd999effc39e0e2",
   "lastOpenFiles": [
+    "notes/2026-04/CLAUDE設定指南：從基礎到高階應用.md",
     "notes/2026-04/如何管理Claude的工作細節與進度.md",
     "raw/2026-04/CLAUDE設定指南：從基礎到高階應用.json",
-    "notes/2026-04/CLAUDE設定指南：從基礎到高階應用.md",
     "raw/sessions/be5cd4540e6744fdb4bd5ed610a703c2.json",
     "notes/2026-04/讓Claude-Code更有效率的四個核心設定.md",
     "notes/2026-04/CLAUDE設定指南精簡版.md",
