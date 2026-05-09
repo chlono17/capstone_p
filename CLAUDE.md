@@ -12,7 +12,7 @@
 - **定位**：輸出驅動的學習社群平台，AI 降低輸出門檻，不替代輸出
 - **目標範圍**：學校用戶（長庚大學），可申請國科會大專生研究計畫
 - **GitHub Repo**：`chlono17/capstone_p`
-- **Tech Lead**：陳楚翊（chuYi / angelo95chen117）
+- **Tech Lead**：chuYi（angelo95chen117）
 - **團隊規模**：3–4 人，正式開始：2026/9
 
 ---
@@ -122,7 +122,7 @@
 | 組員 A | Vector Storage + RAG | Engineer 2–3 |
 | 組員 B | Agent 框架 + MCP | Engineer 5 |
 | 組員 C | 本地部署 + 推論優化 | Engineer 6–7 |
-| 楚翊 | 整體架構 + Feed 設計 + 管理 | 全段 |
+| chuYi | 整體架構 + Feed 設計 + 管理 | 全段 |
 
 ---
 

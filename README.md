@@ -78,6 +78,4 @@ docker compose up -d
 | 組員 A | Vector Storage + RAG |
 | 組員 B | Agent 框架 + MCP |
 | 組員 C | 本地部署 + 推論優化 |
-| 楚翊 | 整體架構 + Feed 設計 + 管理 |
-
-任務追蹤：Linear（`CAP-*`）
+| chuYi | 整體架構 + Feed 設計 + 管理 |

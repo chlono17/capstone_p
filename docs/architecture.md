@@ -106,13 +106,3 @@ cd sandbox/n8n-prototype
 docker compose up -d
 ```
 
----
-
-## Linear 專案對應
-
-| Linear Project | 對應架構層 | 主要 Issues |
-|----------------|-----------|-------------|
-| RAG 知識庫子系統 | STORE + AGENT（RAG） | CAP-7, CAP-8, CAP-9 |
-| Agent & MCP 子系統 | AGENT（知識萃取、格式化、輔助寫作） | CAP-10 |
-| 本地部署 & 推論優化子系統 | INPUT + AGENT（LLM 底層） | CAP-6, CAP-11, CAP-12 |
-| ⚠️ 待新增：Feed 社群子系統 | FEED | 尚未建立 |
