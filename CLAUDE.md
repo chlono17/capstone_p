@@ -40,11 +40,11 @@
 ```
 
 ### n8n 沙盒（練習用，非最終系統）
-目前 `para-ai-system/` 是學習沙盒，讓團隊熟悉本地部署流程、Obsidian workflow、
+目前 `sandbox/n8n-prototype/` 是學習沙盒，讓團隊熟悉本地部署流程、Obsidian workflow、
 理解本地模型限制，為正式開發做準備。已完成：
 - `docker-compose.yml`：n8n + LM Studio（port 5678 / 1234）
 - workflow：`知識萃取對話系統`、`notes-to-podcast`
-- Obsidian vault：`para-ai-system/vault/`，Git 同步中
+- Obsidian vault：`sandbox/n8n-prototype/vault/`，Git 同步中
 
 ---
 
@@ -98,7 +98,7 @@
 - PR 合併後自動推進 Linear issue 狀態
 
 ### Obsidian Vault
-- 路徑：`para-ai-system/vault/`
+- 路徑：`sandbox/n8n-prototype/vault/`
 - 結構：`vault/notes/YYYY-MM/`，每 10 分鐘 auto-commit
 
 ---
@@ -137,7 +137,7 @@ docker compose --profile import up n8n-import  # 匯入 workflow
 
 - n8n UI：`http://localhost:5678`
 - LM Studio API：`http://localhost:1234`
-- Obsidian Vault：`./vault/`
+- Obsidian Vault：`./sandbox/n8n-prototype/vault/`
 
 ---
 
