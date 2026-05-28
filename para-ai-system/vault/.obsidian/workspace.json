@@ -1,24 +1,20 @@
 {
   "main": {
-    "id": "0480846aa81beffa",
+    "id": "27c1c77ec2fa0ac2",
     "type": "split",
     "children": [
       {
-        "id": "80af3ac24cffbe8f",
+        "id": "dc698d391547288a",
         "type": "tabs",
         "children": [
           {
-            "id": "474499a4ffda01fb",
+            "id": "1adadb4130324f69",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "notes/2026-05/Nemotron-3-Nano-Omni-視覺處理應用指南.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "Nemotron-3-Nano-Omni-視覺處理應用指南"
+              "title": "New tab"
             }
           }
         ]
@@ -27,15 +23,15 @@
     "direction": "vertical"
   },
   "left": {
-    "id": "4c2a9c1d9d04eb69",
+    "id": "f4c8576c5081974f",
     "type": "split",
     "children": [
       {
-        "id": "c49a864293bbeda0",
+        "id": "3e2051e5f3a18c93",
         "type": "tabs",
         "children": [
           {
-            "id": "dfd999effc39e0e2",
+            "id": "77b66949252d237c",
             "type": "leaf",
             "state": {
               "type": "file-explorer",
@@ -48,7 +44,7 @@
             }
           },
           {
-            "id": "943bbfca975c9abe",
+            "id": "ab25336ba26c56e9",
             "type": "leaf",
             "state": {
               "type": "search",
@@ -65,7 +61,7 @@
             }
           },
           {
-            "id": "581c06fec991b6c4",
+            "id": "299f346c22b525e9",
             "type": "leaf",
             "state": {
               "type": "bookmarks",
@@ -81,20 +77,19 @@
     "width": 300
   },
   "right": {
-    "id": "23cd2cfc0e372dea",
+    "id": "74d0d771c5057822",
     "type": "split",
     "children": [
       {
-        "id": "167013195150fe7c",
+        "id": "ad55f1ca7bd970f8",
         "type": "tabs",
         "children": [
           {
-            "id": "3a371d8b4e289343",
+            "id": "07348fd7321f8c33",
             "type": "leaf",
             "state": {
               "type": "backlink",
               "state": {
-                "file": "notes/2026-04/notebookLM.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,25 +99,24 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for notebookLM"
+              "title": "Backlinks"
             }
           },
           {
-            "id": "8bf04b3346d8628a",
+            "id": "a49ef6f20cf3106b",
             "type": "leaf",
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "notes/2026-04/notebookLM.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from notebookLM"
+              "title": "Outgoing links"
             }
           },
           {
-            "id": "2cae6c51ad7cd735",
+            "id": "dd1133c63c5174b0",
             "type": "leaf",
             "state": {
               "type": "tag",
@@ -137,7 +131,7 @@
             }
           },
           {
-            "id": "2187f607c672eac7",
+            "id": "f6ce9235201b4e46",
             "type": "leaf",
             "state": {
               "type": "all-properties",
@@ -151,36 +145,25 @@
             }
           },
           {
-            "id": "8168b2fca3198fac",
+            "id": "abd11be8bb3f6a8a",
             "type": "leaf",
             "state": {
               "type": "outline",
               "state": {
-                "file": "notes/2026-04/notebookLM.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of notebookLM"
-            }
-          },
-          {
-            "id": "a54b84f490f12aa7",
-            "type": "leaf",
-            "state": {
-              "type": "git-view",
-              "state": {},
-              "icon": "git-pull-request",
-              "title": "Source Control"
+              "title": "Outline"
             }
           }
-        ],
-        "currentTab": 5
+        ]
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -190,31 +173,9 @@
       "daily-notes:Open today's daily note": false,
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
-      "bases:Create new base": false,
-      "obsidian-git:Open Git source control": false
+      "bases:Create new base": false
     }
   },
-  "active": "474499a4ffda01fb",
-  "lastOpenFiles": [
-    "notes/2026-05/AI工程應用與挑戰：提示詞、上下文與Harness工程.md",
-    "notes/2026-05/RAG-vs.-微調：實際應用指南.md",
-    "raw/2026-05/AI工程應用與挑戰：提示詞、上下文與Harness工程.json",
-    "raw/sessions/54f237ba9cc04fb580ce75d4f7808d86.json",
-    "notes/2026-04/CLAUDE設定指南：從基礎到高階應用.md",
-    "notes/2026-04/如何管理Claude的工作細節與進度.md",
-    "raw/2026-04/CLAUDE設定指南：從基礎到高階應用.json",
-    "raw/sessions/be5cd4540e6744fdb4bd5ed610a703c2.json",
-    "notes/2026-04/讓Claude-Code更有效率的四個核心設定.md",
-    "notes/2026-04/CLAUDE設定指南精簡版.md",
-    "raw/2026-04/如何管理Claude的工作細節與進度.json",
-    "raw/sessions/6fc87f4ea154411ea6b5d281f3688c3e.json",
-    "raw/2026-04/CLAUDE設定指南精簡版.json",
-    "raw/sessions/8b712194111643318f8915ec059f3d37.json",
-    "raw/sessions/7bf3913774b946288ca8059f86374367.json",
-    "raw/sessions/1551433d0a03466f974a3d5137d79293.json",
-    "notes/2026-04/notebookLM.md",
-    "notes/2026-04/進一步-refinement-NotebookLM-模型.md",
-    "notes/2026-04/--notebooklm-input-的核心重點-.md",
-    "notes/2026-04/note-2026-04-29.md"
-  ]
+  "active": "1adadb4130324f69",
+  "lastOpenFiles": []
 }
