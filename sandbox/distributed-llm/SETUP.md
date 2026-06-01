@@ -56,18 +56,21 @@ ping -c 3 <M4-Mini-的-100.x.x.x>
 ## Phase 2：Exo 安裝（兩台都做）
 
 ```bash
-# 在 capstone_project 根目錄
 git pull
-
 cd sandbox/distributed-llm
 chmod +x setup.sh start.sh
 ./setup.sh
 ```
 
+`setup.sh` 會自動處理：Rust 安裝、uv 安裝、exo clone、依賴編譯、dashboard build。
+首次跑約 **10–15 分鐘**（Rust 編譯最久）。
+
+> **注意**：沒有完整 Xcode 時會用 CPU 模式（`--extra mlx-none`）。
+> 從 App Store 裝完整 Xcode 後重跑 `./setup.sh` 可切換為更快的 MLX Metal 模式。
+
 安裝完成後確認：
 ```bash
-source .venv/bin/activate
-exo --version
+cd exo-src && uv run exo --version
 ```
 
 ---
