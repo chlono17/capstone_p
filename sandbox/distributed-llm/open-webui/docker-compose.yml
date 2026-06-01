@@ -1,0 +1,20 @@
+services:
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: open-webui
+    restart: unless-stopped
+    ports:
+      - "3000:8080"
+    volumes:
+      - open-webui-data:/app/backend/data
+    environment:
+      # 指向 Exo endpoint（和 n8n 用同一個）
+      - OPENAI_API_BASE_URL=${LLM_BASE_URL}
+      - OPENAI_API_KEY=${LLM_API_KEY:-sk-exo}
+      # 關閉 Ollama（我們只用 OpenAI-compatible API）
+      - ENABLE_OLLAMA_API=false
+    env_file:
+      - ../.env
+
+volumes:
+  open-webui-data:
