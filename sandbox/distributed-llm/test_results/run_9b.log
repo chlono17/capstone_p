@@ -1,0 +1,101 @@
+
+============================================================
+  全模型測試開始 | 20260603_1634
+  題數：27 題 × 2 個模型 = 54 次推理
+============================================================
+
+
+────────────────────────────────────────────────────────────
+  模型：9B → mlx-community/Qwen3.5-9B-8bit
+────────────────────────────────────────────────────────────
+
+  暖機 Qwen3.5-9B-8bit...
+  ✓ 就緒
+
+  [math_1] 二次方程式
+  Q: 解方程式 x² - 5x + 6 = 0，列出完整步驟。
+         → ERROR: HTTPConnectionPool(host='localhost', port=52415): Read timed out.
+  [math_2] 微分
+  Q: 求 f(x) = x³ + 2x² - 5x + 1 的導函數 f'(x)，並求 x=1 時的切線斜率。
+         → ERROR: HTTPConnectionPool(host='localhost', port=52415): Read timed out.
+  [math_3] 機率
+  Q: 同時擲兩顆標準骰子，點數和恰好為 7 的機率是多少？列出所有組合。
+         → ERROR: HTTPConnectionPool(host='localhost', port=52415): Read timed out.
+  [math_4] 質數篩法
+  Q: 用篩法找出 1 到 30 以內的所有質數，列出清單並說明步驟。
+         → 175.5s | score 0.0/10 | 7 chars
+  [math_5] 數列求和
+  Q: 等差數列首項為 3，公差為 4，求前 20 項的總和。用公式求解並驗證。
+         → 169.9s | score 0.0/10 | 5 chars
+  [prog_1] 二分搜尋
+  Q: 用 Python 實作二分搜尋法，回傳 index 或 -1，附時間複雜度分析。
+         → 100.4s | score 10.0/10 | 1385 chars
+  [prog_2] Debug
+  Q: 以下 Python 程式有 bug，請找出並修正： def fibonacci(n):     if n==0: return 0     elif n==1: return 1     else: ...
+         → ERROR: HTTPConnectionPool(host='localhost', port=52415): Read timed out.
+  [prog_3] 資料結構選擇
+  Q: 設計瀏覽器「上一頁/下一頁」功能，應選用哪種資料結構？為什麼？給出 Python 實作草稿。
+         → 177.3s | score 3.5/10 | 3068 chars
+  [prog_4] 排序複雜度
+  Q: 比較 Bubble Sort、Merge Sort、Quick Sort 的最佳/平均/最差時間複雜度，說明各自使用場景。
+         → ERROR: HTTPConnectionPool(host='localhost', port=52415): Read timed out.
+  [prog_5] RAG 解釋
+  Q: 解釋 RAG 的工作原理，說明它如何解決 LLM 知識截止問題，給出一個具體應用場景。
+         → 174.3s | score 4.6/10 | 94 chars
+  [time_1] 每週學習計畫
+  Q: 我是大學三年級資工系學生，要準備3門期末考（作業系統、演算法、資料庫）還要維持每週3次健身。規劃7天作息表，具體到每天時段。
+         → ERROR: HTTPConnectionPool(host='localhost', port=52415): Read timed out.
+  [time_2] 番茄工作法
+  Q: 我想用番茄工作法提高學習效率，但常常分心。給我5個實際可執行的技巧，說明如何融入大學生日常。
+         → ERROR: HTTPConnectionPool(host='localhost', port=52415): Read timed out.
+  [time_3] SMART 目標
+  Q: 我想在3個月內完成一個 LLM side project 並放上 GitHub。用 SMART 原則拆解成里程碑，附每週具體任務。
+         → ERROR: HTTPConnectionPool(host='localhost', port=52415): Read timed out.
+  [time_4] 考前衝刺
+  Q: 期末考剩兩週，演算法還差30%、機器學習差50%。設計兩週衝刺計畫，列清每天可讀書時數。
+         → ERROR: HTTPConnectionPool(host='localhost', port=52415): Read timed out.
+  [time_5] 深度工作
+  Q: Cal Newport 的「深度工作」理論如何應用在學生身上？給3個立刻能實行的方法，說明如何抵抗社群媒體干擾。
+         → ERROR: HTTPConnectionPool(host='localhost', port=52415): Read timed out.
+  [agent_1] Agent 基本概念
+  Q: 什麼是 LLM Agent？它與普通 LLM 對話的本質差異？說明 Agent 核心組成（感知、推理、行動、記憶），給具體例子。
+         → ERROR: HTTPConnectionPool(host='localhost', port=52415): Read timed out.
+  [agent_2] ReAct 框架
+  Q: 解釋 ReAct 框架的運作方式。用「查詢今天天氣並發送提醒」的任務，畫出完整的 Thought → Action → Observation 循環。
+         → ERROR: HTTPConnectionPool(host='localhost', port=52415): Read timed out.
+  [agent_3] Tool Use 設計
+  Q: 設計一個能搜尋網路、讀寫檔案、執行 Python 的 LLM Agent。說明如何定義三個 Tool 的 schema（name, description, parameters），以及 LLM 如何...
+         → ERROR: HTTPConnectionPool(host='localhost', port=52415): Read timed out.
+  [agent_4] Multi-Agent
+  Q: 什麼是 Multi-Agent 系統？比較 Orchestrator-Worker 和 Peer-to-Peer 兩種架構，說明各自適合場景。舉例說明研究任務如何拆解給多個 Agent 執行。
+         → ERROR: HTTPConnectionPool(host='localhost', port=52415): Read timed out.
+  [mcp_1] MCP 是什麼
+  Q: 解釋 Model Context Protocol（MCP）是什麼，它解決了什麼問題？說明架構中 Host、Client、Server 三個角色各自的職責。
+         → ERROR: HTTPConnectionPool(host='localhost', port=52415): Read timed out.
+  [mcp_2] MCP vs Function Calling
+  Q: 比較 MCP 與傳統 Function Calling / Tool Use 的差異。什麼情況應選 MCP？什麼情況直接用 Function Calling 就夠了？
+         → ERROR: HTTPConnectionPool(host='localhost', port=52415): Read timed out.
+  [mcp_3] MCP Server 設計
+  Q: 幫 Obsidian 知識庫設計一個 MCP Server，讓 AI 能讀寫筆記。說明需要暴露哪些 Resources 和 Tools（各 3 個），並解釋 Resources vs Tools 的選...
+         → ERROR: HTTPConnectionPool(host='localhost', port=52415): Read timed out.
+  [lc_1] LangChain 核心模組
+  Q: 解釋 LangChain 的核心模組：Chain、Agent、Memory、Retriever。用「會記住對話歷史並能查詢文件的聊天機器人」說明各模組角色。
+         → ERROR: HTTPConnectionPool(host='localhost', port=52415): Read timed out.
+  [lc_2] LCEL 語法
+  Q: 什麼是 LangChain Expression Language（LCEL）？用 | 管道語法寫出 prompt template → LLM → output parser 的 chain，並解釋...
+         → ERROR: HTTPConnectionPool(host='localhost', port=52415): Read timed out.
+  [lc_3] LangGraph vs LangChain
+  Q: LangGraph 和 LangChain 的關係是什麼？LangGraph 解決了哪些痛點？說明 Node、Edge、State 概念，舉例什麼場景應選 LangGraph 而不是 LangChai...
+         → ERROR: HTTPConnectionPool(host='localhost', port=52415): Read timed out.
+  [int_1] 技術選型
+  Q: 從零建「自動整理 Obsidian 筆記並生成摘要」的 AI 系統，比較三個方案並選出最適合的：A. 純 LangChain + Function Calling  B. LangGraph + MC...
+         → ERROR: HTTPConnectionPool(host='localhost', port=52415): Read timed out.
+  [int_2] RAG vs Fine-tuning vs Agent
+  Q: 對於「讓 AI 回答公司內部文件問題」，比較 RAG、Fine-tuning、Agent+工具搜尋 三種方案。從成本、維護難度、回答品質、知識更新速度四個維度比較，給出選型建議。
+         → ERROR: HTTPConnectionPool(host='localhost', port=52415): Read timed out.
+
+============================================================
+  生成對比報告...
+  報告 → /Users/angelochen/Desktop/capstone_project/sandbox/distributed-llm/test_results/compare_20260603_1634.md
+============================================================
+

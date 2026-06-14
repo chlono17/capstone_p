@@ -1,0 +1,738 @@
+[
+  {
+    "domain": "math",
+    "id": "math_1",
+    "label": "二次方程式",
+    "prompt": "解方程式 x² - 5x + 6 = 0，列出完整步驟。",
+    "expect_keywords": [
+      "x = 2",
+      "x = 3",
+      "因式"
+    ],
+    "response": "\n\n我們來解這個二次方程式：  \n**x² - 5x + 6 = 0**\n\n---\n\n### 第一步：寫出方程式  \n$$\nx^2 - 5x + 6 = 0\n$$\n\n---\n\n### 第二步：嘗試因式分解  \n我們要找兩個數，使得：\n- 兩數相乘 = 6（常數項）\n- 兩數相加 = -5（x 項的係數）\n\n我們來試幾個組合：\n\n- 2 × 3 = 6  \n- 2 + 3 = 5 → 但這裡是 -5，所以可能是 -2 和 -3\n\n試試看：\n$$\n(x - 2)(x - 3) = x^2 - 5x + 6\n$$\n\n正確！\n\n---\n\n### 第三步：寫出因式分解形式  \n$$\n(x - 2)(x - 3) = 0\n$$\n\n---\n\n### 第四步：根據零乘積法則  \n如果兩個數相乘等於 0，則其中至少一個為 0。\n\n所以：\n$$\nx - 2 = 0 \\quad \\text{或} \\quad x - 3 = 0\n$$\n\n---\n\n### 第五步：解出 x  \n$$\nx = 2 \\quad \\text{或} \\quad x = 3\n$$\n\n---\n\n### 最終答案：\n$$\n\\boxed{x = 2 \\quad \\text{或} \\quad x = 3}\n$$\n\n✅ 解完！",
+    "elapsed_sec": 21.37,
+    "scores": {
+      "keyword_hits": [
+        "x = 2",
+        "x = 3",
+        "因式"
+      ],
+      "keyword_score": 10.0,
+      "length": 541,
+      "overall": 10.0
+    },
+    "usage": {
+      "prompt_tokens": 34,
+      "completion_tokens": 341,
+      "total_tokens": 375,
+      "prompt_tokens_details": {
+        "cached_tokens": 3,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 1,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "status": "ok"
+  },
+  {
+    "domain": "math",
+    "id": "math_2",
+    "label": "微分",
+    "prompt": "求 f(x) = x³ + 2x² - 5x + 1 的導函數 f'(x)，並求 x=1 時的切線斜率。",
+    "expect_keywords": [
+      "3x²",
+      "4x",
+      "-5",
+      "2"
+    ],
+    "response": "\n\n我們來一步一步計算函數 $ f(x) = x^3 + 2x^2 - 5x + 1 $ 的導數 $ f'(x) $，以及在 $ x = 1 $ 時的切線斜率。\n\n---\n\n### 第一步：求導數 $ f'(x) $\n\n對每一項分別求導：\n\n- $ \\frac{d}{dx}(x^3) = 3x^2 $\n- $ \\frac{d}{dx}(2x^2) = 4x $\n- $ \\frac{d}{dx}(-5x) = -5 $\n- $ \\frac{d}{dx}(1) = 0 $\n\n所以導數為：\n\n$$\nf'(x) = 3x^2 + 4x - 5\n$$\n\n---\n\n### 第二步：求 $ x = 1 $ 時的切線斜率\n\n將 $ x = 1 $ 代入導數：\n\n$$\nf'(1) = 3(1)^2 + 4(1) - 5 = 3 + 4 - 5 = 2\n$$\n\n---\n\n### 最終答案：\n\n- 導函數：$ f'(x) = 3x^2 + 4x - 5 $\n- $ x = 1 $ 時的切線斜率：**2** ✅",
+    "elapsed_sec": 19.05,
+    "scores": {
+      "keyword_hits": [
+        "4x",
+        "-5",
+        "2"
+      ],
+      "keyword_score": 7.5,
+      "length": 450,
+      "overall": 8.4
+    },
+    "usage": {
+      "prompt_tokens": 52,
+      "completion_tokens": 300,
+      "total_tokens": 352,
+      "prompt_tokens_details": {
+        "cached_tokens": 3,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 1,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "status": "ok"
+  },
+  {
+    "domain": "math",
+    "id": "math_3",
+    "label": "機率",
+    "prompt": "同時擲兩顆標準骰子，點數和恰好為 7 的機率是多少？請列出所有可能的組合。",
+    "expect_keywords": [
+      "1/6",
+      "6",
+      "36"
+    ],
+    "response": "\n\n同時擲兩顆標準骰子（每顆骰子點數為 1 到 6），我們來計算「點數和恰好為 7」的機率，並列出所有可能的組合。\n\n---\n\n### 🔢 骰子的總組合數：\n\n每顆骰子有 6 個可能的點數（1 到 6），所以兩顆骰子的總組合數是：\n\n$$\n6 \\times 6 = 36\n$$\n\n---\n\n### ✅ 所有可能的組合中，點數和為 7 的有哪些？\n\n我們列出所有點數和為 7 的組合（$(a, b)$ 表示第一顆骰子點數為 $a$，第二顆為 $b$）：\n\n- (1, 6)\n- (2, 5)\n- (3, 4)\n- (4, 3)\n- (5, 2)\n- (6, 1)\n\n總共有 **6 種** 組合。\n\n---\n\n### 📈 機率計算：\n\n$$\n\\text{機率} = \\frac{\\text{成功組合數}}{\\text{總組合數}} = \\frac{6}{36} = \\frac{1}{6}\n$$\n\n---\n\n### ✅ 答案總結：\n\n- **所有點數和為 7 的組合**：  \n  (1, 6), (2, 5), (3, 4), (4, 3), (5, 2), (6, 1)\n\n- **機率**：  \n  $$\n  \\boxed{\\frac{1}{6}}\n  $$\n\n如有需要，也可以畫出所有 36 種組合的表格來進一步驗證。",
+    "elapsed_sec": 24.28,
+    "scores": {
+      "keyword_hits": [
+        "6",
+        "36"
+      ],
+      "keyword_score": 6.7,
+      "length": 562,
+      "overall": 7.8
+    },
+    "usage": {
+      "prompt_tokens": 41,
+      "completion_tokens": 394,
+      "total_tokens": 435,
+      "prompt_tokens_details": {
+        "cached_tokens": 3,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 1,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "status": "ok"
+  },
+  {
+    "domain": "math",
+    "id": "math_4",
+    "label": "質數篩法",
+    "prompt": "用篩法（Sieve of Eratosthenes）找出 1 到 30 以內的所有質數，列出清單並說明步驟。",
+    "expect_keywords": [
+      "2",
+      "3",
+      "5",
+      "7",
+      "11",
+      "13",
+      "23",
+      "29"
+    ],
+    "response": "\n\n好的！我們將用「篩法（Sieve of Eratosthenes）」來找出 1 到 30 之間的所有質數。這個方法是用來找出所有小於或等於某個數字的質數，它的優點是效率高、容易理解。以下是步驟說明與結果。\n\n---\n\n## ✅ 步驟說明（Sieve of Eratosthenes）\n\n### 📌 步驟 1：建立一個從 1 到 30 的數字清單\n我們從 1 到 30 這 30 個數字開始：\n\n```\n[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30]\n```\n\n### 📌 步驟 2：標記 1 不是質數\n質數的定義是「大於 1 且只能被 1 和自身整除的數」。所以我們先排除 1。\n\n```\n[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30]\n```\n→ 將 1 標記為「非質數」（通常不顯示）\n\n### 📌 步驟 3：從最小的質數 2 開始，標記所有 2 的倍數（除了 2 本身）\n\n- 2 是質數。\n- 所有 2 的倍數（4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30）都會被標記為「非質數」。\n\n```\n[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30]\n```\n→ 標記為非質數的數字：4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30\n\n### 📌 步驟 4：跳過已被標記的數字，找到下一個未標記的數字（3）\n\n- 3 是質數。\n- 所有 3 的倍數（6, 9, 12, 15, 18, 21, 24, 27, 30）會被標記為「非質數」。\n\n```\n[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30]\n```\n→ 標記為非質數的數字：6, 9, 12, 15, 18, 21, 24, 27, 30\n\n### �",
+    "elapsed_sec": 61.56,
+    "scores": {
+      "keyword_hits": [
+        "2",
+        "3",
+        "5",
+        "7",
+        "11",
+        "13",
+        "23",
+        "29"
+      ],
+      "keyword_score": 10.0,
+      "length": 1113,
+      "overall": 10.0
+    },
+    "usage": {
+      "prompt_tokens": 50,
+      "completion_tokens": 1000,
+      "total_tokens": 1050,
+      "prompt_tokens_details": {
+        "cached_tokens": 3,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 1,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "status": "ok"
+  },
+  {
+    "domain": "math",
+    "id": "math_5",
+    "label": "數列求和",
+    "prompt": "等差數列首項為 3，公差為 4，求前 20 項的總和。請用公式求解並驗證。",
+    "expect_keywords": [
+      "820",
+      "公式",
+      "79"
+    ],
+    "response": "\n\n我們來用**等差數列的求和公式**來解這道題。\n\n---\n\n### 已知條件：\n\n- 首項 $ a = 3 $\n- 公差 $ d = 4 $\n- 項數 $ n = 20 $\n\n---\n\n### 等差數列的求和公式為：\n\n$$\nS_n = \\frac{n}{2} \\left[2a + (n - 1)d\\right]\n$$\n\n代入數值：\n\n$$\nS_{20} = \\frac{20}{2} \\left[2 \\cdot 3 + (20 - 1) \\cdot 4\\right]\n$$\n\n$$\nS_{20} = 10 \\left[6 + 19 \\cdot 4\\right]\n$$\n\n$$\nS_{20} = 10 \\left[6 + 76\\right] = 10 \\cdot 82 = 820\n$$\n\n---\n\n### 驗證：\n\n可以列出前幾項看看是否符合公式：\n\n- 第1項：3\n- 第2項：3 + 4 = 7\n- 第3項：7 + 4 = 11\n- 第4項：11 + 4 = 15\n- ...\n- 第20項：3 + (20 - 1) × 4 = 3 + 76 = 79\n\n等差數列的總和也可以用另一個公式驗證：\n\n$$\nS_n = \\frac{n}{2} (a + l)\n$$\n\n其中 $ l $ 是**末項**（第20項） = 79\n\n$$\nS_{20} = \\frac{20}{2} (3 + 79) = 10 \\cdot 82 = 820\n$$\n\n---\n\n### 結論：\n\n前20項的總和是 **820**。✅\n\n如有需要，也可以列舉出所有20項並加總，但這已經足夠驗證正確性。",
+    "elapsed_sec": 28.47,
+    "scores": {
+      "keyword_hits": [
+        "820",
+        "公式",
+        "79"
+      ],
+      "keyword_score": 10.0,
+      "length": 691,
+      "overall": 10.0
+    },
+    "usage": {
+      "prompt_tokens": 49,
+      "completion_tokens": 458,
+      "total_tokens": 507,
+      "prompt_tokens_details": {
+        "cached_tokens": 3,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 1,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "status": "ok"
+  },
+  {
+    "domain": "math",
+    "id": "math_hard_1",
+    "label": "積分（動態加測）",
+    "prompt": "計算不定積分 ∫(3x² + 2x - 1)dx，並求定積分 ∫₀²(3x² + 2x - 1)dx 的值。",
+    "expect_keywords": [
+      "x³",
+      "x²",
+      "x",
+      "10",
+      "+C"
+    ],
+    "response": "\n\n我們來逐步計算這兩個積分：\n\n---\n\n### 一、不定積分：  \n$$\n\\int (3x^2 + 2x - 1)\\, dx\n$$\n\n我們對每一項分別積分：\n\n- $\\int 3x^2\\, dx = x^3$\n- $\\int 2x\\, dx = x^2$\n- $\\int -1\\, dx = -x$\n\n所以不定積分為：\n$$\n\\int (3x^2 + 2x - 1)\\, dx = x^3 + x^2 - x + C\n$$\n其中 $C$ 是積分常數。\n\n---\n\n### 二、定積分：  \n$$\n\\int_0^2 (3x^2 + 2x - 1)\\, dx\n$$\n\n我們用不定積分的結果來求定積分：\n\n$$\n\\left[ x^3 + x^2 - x \\right]_0^2 = (2^3 + 2^2 - 2) - (0^3 + 0^2 - 0)\n$$\n\n計算：\n\n- 當 $x = 2$：  \n  $2^3 + 2^2 - 2 = 8 + 4 - 2 = 10$\n\n- 當 $x = 0$：  \n  $0^3 + 0^2 - 0 = 0$\n\n所以定積分為：\n$$\n10 - 0 = 10\n$$\n\n---\n\n### 最終答案：\n\n- 不定積分：\n  $$\n  \\boxed{x^3 + x^2 - x + C}\n  $$\n\n- 定積分：\n  $$\n  \\boxed{10}\n  $$",
+    "elapsed_sec": 24.18,
+    "scores": {
+      "keyword_hits": [
+        "x",
+        "10"
+      ],
+      "keyword_score": 4.0,
+      "length": 591,
+      "overall": 6.1
+    },
+    "usage": {
+      "prompt_tokens": 57,
+      "completion_tokens": 387,
+      "total_tokens": 444,
+      "prompt_tokens_details": {
+        "cached_tokens": 3,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 1,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "status": "ok"
+  },
+  {
+    "domain": "programming",
+    "id": "prog_1",
+    "label": "二分搜尋",
+    "prompt": "用 Python 實作二分搜尋法，要求：接受已排序的 list 和目標值，回傳 index 或 -1，附上時間複雜度分析。",
+    "expect_keywords": [
+      "def",
+      "mid",
+      "left",
+      "right",
+      "O(log n)"
+    ],
+    "response": "\n\n當然可以！下面是一個使用 Python 實作的 **二分搜尋法（Binary Search）**，它接受一個已排序的列表（升序）和一個目標值，並返回目標值的索引（如果存在），否則返回 `-1`。\n\n---\n\n### ✅ Python 實作\n\n```python\ndef binary_search(sorted_list, target):\n    left = 0\n    right = len(sorted_list) - 1\n\n    while left <= right:\n        mid = (left + right) // 2\n        if sorted_list[mid] == target:\n            return mid\n        elif sorted_list[mid] < target:\n            left = mid + 1\n        else:\n            right = mid - 1\n\n    return -1\n```\n\n---\n\n### 📌 使用範例\n\n```python\nsorted_list = [1, 3, 5, 7, 9, 11, 13, 15]\ntarget = 7\n\nresult = binary_search(sorted_list, target)\nprint(\"Index of target:\", result)  # Output: Index of target: 3\n```\n\n---\n\n### 🕒 時間複雜度分析\n\n- **時間複雜度：** `O(log n)`\n  - 每次將搜索範圍減半，因此最多需要 `log₂(n)` 次比較。\n- **空間複雜度：** `O(1)`（只使用常數空間）\n\n---\n\n### 📌 注意事項\n\n- **此算法假設輸入的 `sorted_list` 是已排序的**（通常是升序）。\n- 如果列表未排序，請先排序再使用此方法。\n\n---\n\n如果你有其他需求（例如尋找第一個或最後一個出現的值），也可以擴展這個算法。歡迎隨時提問！",
+    "elapsed_sec": 24.37,
+    "scores": {
+      "keyword_hits": [
+        "def",
+        "mid",
+        "left",
+        "right",
+        "O(log n)"
+      ],
+      "keyword_score": 10.0,
+      "length": 906,
+      "overall": 10.0
+    },
+    "usage": {
+      "prompt_tokens": 49,
+      "completion_tokens": 389,
+      "total_tokens": 438,
+      "prompt_tokens_details": {
+        "cached_tokens": 3,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 1,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "status": "ok"
+  },
+  {
+    "domain": "programming",
+    "id": "prog_2",
+    "label": "Debug",
+    "prompt": "以下 Python 程式有 bug，請找出並修正：\n```python\ndef fibonacci(n):\n    if n == 0:\n        return 0\n    elif n == 1:\n        return 1\n    else:\n        return fibonacci(n-1) + fibonacci(n-3)\nprint(fibonacci(10))\n```\n期望輸出應為 55。",
+    "expect_keywords": [
+      "n-2",
+      "fibonacci(n-2)",
+      "55"
+    ],
+    "response": "\n\n你提供的 `fibonacci` 函數有錯誤，導致計算結果不正確。問題出在 **遞迴的邏輯** 上，特別是 `return fibonacci(n-1) + fibonacci(n-3)` 這一行。\n\n---\n\n### 🔍 問題分析\n\n你這段程式碼的邏輯是：\n```python\nreturn fibonacci(n-1) + fibonacci(n-3)\n```\n\n但正確的 Fibonacci 遞迴公式應該是：\n```python\nreturn fibonacci(n-1) + fibonacci(n-2)\n```\n\n所以這裡的錯誤是把 `n-2` 寫成了 `n-3`，導致計算出的不是 Fibonacci 數列。\n\n---\n\n### ✅ 正確的 Fibonacci 函數\n\n```python\ndef fibonacci(n):\n    if n == 0:\n        return 0\n    elif n == 1:\n        return 1\n    else:\n        return fibonacci(n-1) + fibonacci(n-2)\n\nprint(fibonacci(10))  # 應該輸出 55\n```\n\n---\n\n### 🧪 測試結果\n\n```python\nfibonacci(0)  # 0\nfibonacci(1)  # 1\nfibonacci(2)  # 1\nfibonacci(3)  # 2\nfibonacci(4)  # 3\nfibonacci(5)  # 5\nfibonacci(6)  # 8\nfibonacci(7)  # 13\nfibonacci(8)  # 21\nfibonacci(9)  # 34\nfibonacci(10) # 55 ✅\n```\n\n---\n\n### ✅ 結論\n\n**錯誤點**：`fibonacci(n-3)`  \n**正確應為**：`fibonacci(n-2)`\n\n修正後程式將正確計算 Fibonacci 數列，輸出 `55`。",
+    "elapsed_sec": 26.67,
+    "scores": {
+      "keyword_hits": [
+        "n-2",
+        "fibonacci(n-2)",
+        "55"
+      ],
+      "keyword_score": 10.0,
+      "length": 869,
+      "overall": 10.0
+    },
+    "usage": {
+      "prompt_tokens": 92,
+      "completion_tokens": 418,
+      "total_tokens": 510,
+      "prompt_tokens_details": {
+        "cached_tokens": 3,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 1,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "status": "ok"
+  },
+  {
+    "domain": "programming",
+    "id": "prog_3",
+    "label": "資料結構選擇",
+    "prompt": "你在設計一個瀏覽器的「上一頁/下一頁」功能，應該選用哪種資料結構？為什麼？請給出 Python 的實作草稿。",
+    "expect_keywords": [
+      "stack",
+      "Stack",
+      "堆疊",
+      "push",
+      "pop"
+    ],
+    "response": "\n\n在設計瀏覽器的「上一頁/下一頁」功能時，**應該使用雙向鏈結串列（Doubly Linked List）** 或類似結構，例如使用 **棧（Stack）** 的組合方式。\n\n---\n\n## ✅ 為什麼選用雙向鏈結串列？\n\n瀏覽器的「上一頁」和「下一頁」功能類似於瀏覽器的歷史記錄功能，例如：\n\n- 當你點選「上一頁」時，瀏覽器應該回到你之前訪問的網頁；\n- 當你點選「下一頁」時，瀏覽器應該回到你之前退回的網頁。\n\n這類功能需要**支援前後導覽**，而雙向鏈結串列恰好可以：\n\n- 快速移動到前一個節點（上一頁）；\n- 快速移動到下一個節點（下一頁）；\n- 節點之間可以互相連結，方便插入/刪除。\n\n---\n\n## 🧠 類比：瀏覽器歷史記錄\n\n可以將瀏覽器的歷史記錄視為一個雙向鏈結串列，其中：\n\n- 每個節點代表一個網頁（URL）；\n- 節點之間有前驅和後繼指針。\n\n---\n\n## 🧾 Python 實作草稿\n\n下面是一個簡單的 Python 實作，使用雙向鏈結串列的結構來實現「上一頁」和「下一頁」功能：\n\n```python\nclass Node:\n    def __init__(self, url):\n        self.url = url\n        self.prev = None\n        self.next = None\n\nclass BrowserHistory:\n    def __init__(self):\n        self.current = None  # 當前頁面\n\n    def visit(self, url):\n        new_node = Node(url)\n        if self.current is None:\n            self.current = new_node\n        else:\n            new_node.prev = self.current\n            self.current.next = new_node\n            self.current = new_node\n\n    def go_back(self):\n        if self.current.prev:\n            self.current = self.current.prev\n            return self.current.url\n        else:\n            return \"無法再後退\"\n\n    def go_forward(self):\n        if self.current.next:\n            self.current = self.current.next\n            return self.current.url\n        else:\n            return \"無法再前進\"\n\n# 使用示例\nbrowser = BrowserHistory()\nbrowser.visit(\"https://example.com\")\nbrowser.visit(\"https://google.com\")\nbrowser.visit(\"https://github.com\")\n\nprint(\"當前頁面:\", browser.current.url)  # GitHub\nprint(\"後退:\", browser.go_back())       # Google\nprint(\"後退:\", browser.go_back())       # Example\nprint(\"前進:\", browser.go_forward())    # Google\nprint(\"前進:\", browser.go_forward())    # GitHub\nprint(\"後退:\", browser.go_back())       # Google\nprint(\"後退:\", browser.go_back())       # Example\nprint(\"後退:\", browser.go_back())       # 無法再後退\n```\n\n---\n\n## 🧩 可選替代方案：用兩個棧（Stack）\n\n如果你只考慮「上一頁」和「下一頁」的導覽，也可以使用兩種棧：\n\n- `back_stack`：保存瀏覽過的頁面（用於「上一頁」）\n- `forward_stack`：保存「上一頁」後的頁面（用於「下一頁」）\n\n但這會導致每次「上一頁」時需要將當前頁面移到 `forward_stack`，不如雙向鏈結串列直接。\n\n---\n\n## ✅ 總結\n\n| 資料結構 | 是否適合 | 理由 |\n|----------|----------|------|\n| 雙向鏈結串列 | ✅ 是 | 支援前後導覽，操作靈活 |\n| 棧（Stack） | ✅ 可以 | 若只需要導覽，但不支援隨機訪問 |\n| 陣列 | ❌ 不適合 | 過於笨重，插入/刪除效率低 |\n\n---\n\n如果你只需要簡單的導覽功能，可以用雙向鏈結串列；如果需要處理更複雜的歷史記錄（如瀏覽器的「歷史」頁面），建議使用更完整的結構，例如 `collections.deque` 或自定義的雙向鏈結串列。",
+    "elapsed_sec": 57.72,
+    "scores": {
+      "keyword_hits": [
+        "stack",
+        "Stack"
+      ],
+      "keyword_score": 4.0,
+      "length": 2261,
+      "overall": 6.1
+    },
+    "usage": {
+      "prompt_tokens": 47,
+      "completion_tokens": 937,
+      "total_tokens": 984,
+      "prompt_tokens_details": {
+        "cached_tokens": 3,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 1,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "status": "ok"
+  },
+  {
+    "domain": "programming",
+    "id": "prog_4",
+    "label": "排序複雜度",
+    "prompt": "比較 Bubble Sort、Merge Sort、Quick Sort 的最佳、平均、最差時間複雜度，說明各自使用場景。",
+    "expect_keywords": [
+      "O(n²)",
+      "O(n log n)",
+      "Merge Sort",
+      "Quick Sort"
+    ],
+    "response": "\n\n以下是 **Bubble Sort**、**Merge Sort**、**Quick Sort** 這三種排序算法在 **最佳**、**平均**、**最差** 時間複雜度的比較，以及各自的 **使用場景**。\n\n---\n\n## 🔢 三種排序算法的時間複雜度比較\n\n| 排序算法     | 最佳時間複雜度 | 平均時間複雜度 | 最差時間複雜度 | 空間複雜度 | 是否穩定 |\n|--------------|----------------|----------------|----------------|------------|----------|\n| Bubble Sort  | O(n)           | O(n²)          | O(n²)          | O(1)       | 是       |\n| Merge Sort   | O(n log n)     | O(n log n)     | O(n log n)     | O(n)       | 是       |\n| Quick Sort   | O(n log n)     | O(n log n)     | O(n²)          | O(log n)   | 否       |\n\n---\n\n## 📌 各種排序算法的時間複雜度解釋\n\n### 1. **Bubble Sort（氣泡排序）**\n- **最佳時間**：O(n)\n  - 當陣列已經排序好時，只需要一次掃描即可完成。\n- **平均 & 最差時間**：O(n²)\n  - 每個元素都要與其他元素比較，導致效率低。\n- **空間複雜度**：O(1)（原地排序）\n- **穩定性**：穩定（相同值的元素不會改變順序）\n\n#### 🧠 使用場景：\n- 適用於小規模資料或教學用途。\n- 當資料幾乎已經排序時（如資料已經大部分有序）。\n- 不適合大規模資料排序。\n\n---\n\n### 2. **Merge Sort（合併排序）**\n- **最佳、平均、最差時間**：O(n log n)\n  - 不論資料是否有序，都進行分治處理。\n- **空間複雜度**：O(n)\n  - 需要額外空間來儲存合併的結果。\n- **穩定性**：穩定\n\n#### 🧠 使用場景：\n- 適用於大規模資料排序。\n- 需要穩定排序時（例如對物件排序時，相同 key 的物件順序不能亂）。\n- 無論資料是否有序，性能穩定。\n\n---\n\n### 3. **Quick Sort（快速排序）**\n- **最佳時間**：O(n log n)\n  - 當每次都能平均分割資料時。\n- **平均時間**：O(n log n)\n- **最差時間**：O(n²)\n  - 當資料已經排序或反向排序時，分割極不平衡。\n- **空間複雜度**：O(log n)（遞歸調用堆疊）\n- **穩定性**：不穩定\n\n#### 🧠 使用場景：\n- 適用於中大型資料排序。\n- 當資料不預期是有序或反向排序時。\n- 優點是內存使用較少（相比 Merge Sort）。\n- 不適合需要穩定排序的場合。\n\n---\n\n## ✅ 總結比較\n\n| 情況 | 推薦排序 |\n|------|----------|\n| 小資料、幾乎有序 | **Bubble Sort** |\n| 大資料、需要穩定 | **Merge Sort** |\n| 中大型資料、不需穩定 | **Quick Sort** |\n\n---\n\n## 🧠 小知識補充\n\n- **穩定排序**：相同 key 的元素排序後順序不變（如對學生按成績排序時，成績相同的學生順序不變）。\n- **原地排序**：空間複雜度為 O(1)，不需要額外空間。\n\n---\n\n如果你有具體的應用場景（如資料量大小、是否穩定、是否有序），我可以進一步推薦最適合的排序演算法。",
+    "elapsed_sec": 53.4,
+    "scores": {
+      "keyword_hits": [
+        "O(n²)",
+        "O(n log n)",
+        "Merge Sort",
+        "Quick Sort"
+      ],
+      "keyword_score": 10.0,
+      "length": 1615,
+      "overall": 10.0
+    },
+    "usage": {
+      "prompt_tokens": 39,
+      "completion_tokens": 864,
+      "total_tokens": 903,
+      "prompt_tokens_details": {
+        "cached_tokens": 3,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 1,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "status": "ok"
+  },
+  {
+    "domain": "programming",
+    "id": "prog_5",
+    "label": "RAG 解釋",
+    "prompt": "用簡單的語言解釋 RAG（Retrieval-Augmented Generation）的工作原理，說明它如何解決 LLM 的知識截止問題，給出一個具體應用場景。",
+    "expect_keywords": [
+      "檢索",
+      "向量",
+      "LLM",
+      "context",
+      "知識庫"
+    ],
+    "response": "\n\n當然！以下是用簡單語言解釋 **RAG（Retrieval-Augmented Generation）** 的工作原理、它如何解決 LLM 的知識截止問題，以及一個具體的應用場景：\n\n---\n\n### 🔍 RAG 是什麼？\n\nRAG 是一種結合「搜尋」和「生成」的技術。它讓人工智能在回答問題時，不僅依靠自己內建的知識（像是傳統的 LLM），還會去「找資料」，再根據找到的資料來生成回答。\n\n---\n\n### 🧠 RAG 的工作原理（簡單說明）：\n\n1. **使用者提問**：比如問「2023 年什麼時候開放口罩購買？」\n2. **RAG 先去「搜尋」**：它會去網路上或資料庫裡找最新資訊，比如最新的新聞或官方公告。\n3. **再「生成回答」**：根據搜尋到的資料，生成一個準確、最新的回答。\n\n---\n\n### 🧩 RAG 如何解決 LLM 的「知識截止問題」？\n\n很多 LLM（如傳統的 AI 模型）只學習到某個時間點的資料（例如 2023 年前的資料）。如果問題是「2024 年的總統選舉誰當選了？」，這些模型可能不知道，因為它的知識「截止」在 2023 年。\n\nRAG 就是幫 LLM「補課」，讓它在回答時可以「查資料」，解決知識過時的問題。\n\n---\n\n### 🧑‍💻 一個實際應用場景：\n\n**場景**：醫療問答系統\n\n- **問題**：「糖尿病患者可以吃什麼水果？」\n- **傳統 LLM**：可能根據過去資料回答，但可能沒有最新營養建議。\n- **RAG 系統**：會先搜尋「最新糖尿病飲食指南」，再根據最新的醫學資料生成回答，比如說「現在建議糖尿病患者可以吃少量的蘋果、藍莓等低糖水果」。\n\n---\n\n### ✅ 總結：\n\n- RAG 讓 AI 不只靠記憶，還能「查資料」。\n- 解決 LLM 知識過時的問題。\n- 常用在需要最新資訊的應用中，例如醫療、新聞、客服等。\n\n如果你想要更深入的技術說明，也可以再問我！",
+    "elapsed_sec": 32.4,
+    "scores": {
+      "keyword_hits": [
+        "LLM"
+      ],
+      "keyword_score": 2.0,
+      "length": 819,
+      "overall": 4.8
+    },
+    "usage": {
+      "prompt_tokens": 50,
+      "completion_tokens": 521,
+      "total_tokens": 571,
+      "prompt_tokens_details": {
+        "cached_tokens": 3,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 1,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "status": "ok"
+  },
+  {
+    "domain": "programming",
+    "id": "prog_hard_1",
+    "label": "動態規劃（動態加測）",
+    "prompt": "用動態規劃解決「爬樓梯」問題：有 n 個台階，每次可以爬 1 或 2 個台階，有多少種不同的爬法？請用 Python 實作，並分析時間和空間複雜度。",
+    "expect_keywords": [
+      "dp",
+      "def",
+      "fibonacci",
+      "O(n)"
+    ],
+    "response": "\n\n當然可以！我們來用 **動態規劃（Dynamic Programming, DP）** 解決「爬樓梯」問題。\n\n---\n\n## 🧠 問題描述\n\n有 `n` 個台階，每次可以爬 **1** 或 **2** 個台階。請問有多少種不同的爬法可以到達樓頂。\n\n---\n\n## 🧮 動態規劃思路\n\n### 狀態定義：\n設 `dp[i]` 表示到達第 `i` 個台階的爬法數。\n\n### 狀態轉移方程：\n因為每次可以爬 1 或 2 個台階，所以：\n```\ndp[i] = dp[i-1] + dp[i-2]\n```\n也就是說，到達第 i 個台階的方式數，是到達 i-1 個台階的方式數加上到達 i-2 個台階的方式數。\n\n### 初始條件：\n- `dp[0] = 1`：表示在地面上（0 個台階），只有一種方式（什麼都不做）。\n- `dp[1] = 1`：表示只有一個台階，只能爬 1 步。\n\n---\n\n## ✅ Python 實作\n\n```python\ndef climb_stairs(n):\n    if n == 0:\n        return 1\n    if n == 1:\n        return 1\n\n    dp = [0] * (n + 1)\n    dp[0] = 1\n    dp[1] = 1\n\n    for i in range(2, n + 1):\n        dp[i] = dp[i - 1] + dp[i - 2]\n\n    return dp[n]\n```\n\n---\n\n## 📈 時間與空間複雜度分析\n\n- **時間複雜度**：`O(n)`  \n  我們只需要遍歷一次從 2 到 `n` 的每個數字。\n\n- **空間複雜度**：`O(n)`  \n  我們使用了一個長度為 `n+1` 的陣列 `dp`。\n\n---\n\n## 🔄 可優化空間複雜度（可選）\n\n如果我們只關心前兩步的值，可以使用兩變數來替代陣列，達到 `O(1)` 空間複雜度：\n\n```python\ndef climb_stairs_optimized(n):\n    if n == 0:\n        return 1\n    if n == 1:\n        return 1\n\n    prev_prev = 1  # dp[i-2]\n    prev = 1       # dp[i-1]\n\n    for i in range(2, n + 1):\n        current = prev + prev_prev\n        prev_prev, prev = prev, current\n\n    return prev\n```\n\n---\n\n## ✅ 範例測試\n\n```python\nprint(climb_stairs(2))      # 輸出 2\nprint(climb_stairs(3))      # 輸出 3\nprint(climb_stairs(5))      # 輸出 8\n```\n\n---\n\n## 🧠 結論\n\n動態規劃是解決這類「遞推問題」的經典方法，適用於有重疊子問題與最優子結構的問題。\n\n如果你有任何其他問題或想擴展成「可以爬 k 步」的版本，也可以告訴我 😊",
+    "elapsed_sec": 46.29,
+    "scores": {
+      "keyword_hits": [
+        "dp",
+        "def",
+        "O(n)"
+      ],
+      "keyword_score": 7.5,
+      "length": 1364,
+      "overall": 8.4
+    },
+    "usage": {
+      "prompt_tokens": 68,
+      "completion_tokens": 753,
+      "total_tokens": 821,
+      "prompt_tokens_details": {
+        "cached_tokens": 4,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 1,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "status": "ok"
+  },
+  {
+    "domain": "time_planning",
+    "id": "time_1",
+    "label": "每週學習計畫",
+    "prompt": "我是大學三年級資工系學生，要同時準備3門期末考（作業系統、演算法、資料庫），還要維持每週3次健身。請幫我規劃一份7天的作息表，具體到每天的時段安排。",
+    "expect_keywords": [
+      "週一",
+      "週二",
+      "小時",
+      "休息",
+      "複習"
+    ],
+    "response": "\n\n當然可以！作為一個大三資工學生，同時準備三門課（作業系統、演算法、資料庫）並維持健身，時間管理非常重要。以下是一份 **7天的作息表**，每小時都明確安排，幫助你 **高效學習 + 維持健康**。\n\n---\n\n## 📅 **7天作息表（每天12小時）**\n\n### 🕒 **每天作息框架**  \n**早上 7:00 – 12:00**：學習 + 健身  \n**下午 13:00 – 18:00**：學習 + 休息  \n**晚上 19:00 – 23:00**：學習 + 放鬆\n\n---\n\n## 🗓️ **每日規劃（以週一為例）**\n\n### ✅ **週一**\n| 時間 | 活動 |\n|------|------|\n| 7:00 – 7:30 | 起來 + 洗漱 + 早餐 |\n| 7:30 – 8:30 | 健身（全身訓練 / 跑步） |\n| 8:30 – 10:00 | 作業系統（複習重點 + 看課本） |\n| 10:00 – 10:30 | 休息（喝水 + 走動） |\n| 10:30 – 12:00 | 演算法（做題 + 複習關鍵概念） |\n\n**午休**  \n| 12:00 – 13:00 | 午餐 + 休息 |\n\n**下午**  \n| 13:00 – 14:30 | 資料庫（複習 SQL / 概念 + 做練習題） |\n| 14:30 – 15:00 | 休息 |\n| 15:00 – 17:00 | 自由學習（根據當天進度調整） |\n| 17:00 – 18:00 | 放鬆（喝點水、看個短影片） |\n\n**晚上**  \n| 19:00 – 21:00 | 總複習 + 整理筆記（三門課輪流） |\n| 21:00 – 22:00 | 放鬆 / 看點輕鬆的內容（如動畫、音樂） |\n| 22:00 – 23:00 | 睡前準備 + 睡覺 |\n\n---\n\n### ✅ **週二至週日（每日安排類似，但科目輪換）**\n\n你可以採取「科目輪換制」，讓學習更有效率、不易疲勞：\n\n| 週次 | 作業系統 | 演算法 | 資料庫 |\n|------|----------|--------|--------|\n| 週一 | ✅ | ❌ | ❌ |\n| 週二 | ❌ | ✅ | ❌ |\n| 週三 | ❌ | ❌ | ✅ |\n| 週四 | ✅ | ❌ | ❌ |\n| 週五 | ❌ | ✅ | ❌ |\n| 週六 | ❌ | ❌ | ✅ |\n| 週日 | 總複習 / 補強弱點 |\n\n---\n\n## 🧠 **學習策略建議**\n\n1. **每門課每天至少安排 1.5–2 小時**（可分為兩段）\n2. **每次學習 45–50 分鐘，休息 10–15 分鐘**（番茄鐘法）\n3. **健身建議**：  \n   - 每週3次，可選擇：  \n     - 周一：全身訓練  \n     - 周三：有氧 + 核心  \n     - 周五：力量 + 拉伸  \n   - 健身前後做熱身與拉伸\n4. **資料庫**：多寫 SQL 練習題，搭配圖表理解 ER Diagram  \n5. **演算法**：多做題，用 LeetCode 或課本例題  \n6. **作業系統**：理解記憶關鍵概念（如程序、排程、記憶體管理）\n\n---\n\n## 🧘‍♂️ **小提醒**\n\n- 避免熬夜，每天 **23:00 前入睡**，確保",
+    "elapsed_sec": 61.67,
+    "scores": {
+      "keyword_hits": [
+        "週一",
+        "週二",
+        "小時",
+        "休息",
+        "複習"
+      ],
+      "keyword_score": 10.0,
+      "length": 1404,
+      "overall": 10.0
+    },
+    "usage": {
+      "prompt_tokens": 68,
+      "completion_tokens": 1000,
+      "total_tokens": 1068,
+      "prompt_tokens_details": {
+        "cached_tokens": 3,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 1,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "status": "ok"
+  },
+  {
+    "domain": "time_planning",
+    "id": "time_2",
+    "label": "番茄工作法",
+    "prompt": "我想用番茄工作法提高學習效率，但常常分心。請給我5個實際可執行的技巧，並說明如何把番茄工作法融入大學生日常學習。",
+    "expect_keywords": [
+      "25分鐘",
+      "番茄",
+      "休息",
+      "專注"
+    ],
+    "response": "\n\n非常好！番茄工作法（Pomodoro Technique）是一種簡單又有效的時間管理方法，能幫助你提高專注力、減少分心，特別適合學生使用。以下是 **5個實際可執行的技巧**，讓你更有效地運用番茄工作法，並融入大學生活：\n\n---\n\n### 🔹 1. **設定明確的目標，避免分心**\n- **做法**：每個番茄鐘（25分鐘）開始前，先明確這段時間要完成什麼任務。例如：「我現在要讀完這章課文的前兩節」或「我要整理這份筆記的重點」。\n- **融入大學生活**：在預習、複習或寫作業時，先列出一個小目標，比如「我這25分鐘專注於數學作業的第1題」。這有助於集中注意力，減少分心。\n\n---\n\n### 🔹 2. **使用物理或數位計時器，讓自己進入「深度學習」狀態**\n- **做法**：可以使用一個物理計時器（如番茄鐘）、手機App（如Focus To-Do、Pomodoro Focus）或瀏覽器擴充（如Forest）。\n- **融入大學生活**：在圖書館或宿舍學習時，打開一個番茄鐘App，設定25分鐘倒數。當計時器開始時，關掉手機通知，讓自己進入「心流狀態」。\n\n---\n\n### 🔹 3. **每完成4個番茄鐘後，休息15–30分鐘**\n- **做法**：每25分鐘學習 + 5分鐘休息 → 4個後休息15–30分鐘。\n- **融入大學生活**：在課堂間隙或放學後，可以安排番茄鐘學習，例如：\n  - 早上7:00–7:25：學英語\n  - 7:25–7:30：休息\n  - 7:30–7:55：學數學\n  - 7:55–8:00：休息\n  - 8:00–8:25：預習課本\n\n這有助於避免學習過度疲勞，同時讓大腦有時間整理資訊。\n\n---\n\n### 🔹 4. **將番茄工作法與筆記法結合，提高學習效率**\n- **做法**：在番茄鐘期間，採用「筆記+總結」的方式學習。例如：\n  - 25分鐘讀課文 → 5分鐘整理筆記\n- **融入大學生活**：在課後複習時，把一個番茄鐘用來讀課文，另一個番茄鐘用來整理筆記或做練習題。這有助於深化理解，並減少分心。\n\n---\n\n### 🔹 5. **設定「干擾清單」，預防分心**\n- **做法**：在開始學習前，列出可能讓你分心的事物（如手機訊息、社交媒體、雜念），並在番茄鐘中進行「干擾管理」。\n- **融入大學生活**：\n  - 把手機放進抽屜，關閉通知\n  - 把筆電放在一邊，只用筆和紙筆記\n  - 當有雜念時，寫下來，等休息時間再處理\n\n---\n\n### 📌 範例：一個大學生活中的番茄工作法時間表\n\n| 時間         | 活動                     | 番茄鐘數 |\n|--------------|--------------------------|-----------|\n| 08:00–08:25  | 學習英語課文             | 1         |\n| 08:25–08:30  | 休息                     | –         |\n| 08:30–08:55  | 複習數學作業             | 2         |\n| 08:55–09:00  | 休息                     | –         |\n| 09:00–09:25  | 閱讀歷史書               | 3         |\n| 09:25–09:30  | 休息                     | –         |\n| 09:30–09:55  | 整理筆記 + 做練習題      | 4         |\n| 09:55–10:25  | 長休息（15–30分鐘）      | –         |\n\n---\n\n### ✅ 小提醒：\n- **番茄",
+    "elapsed_sec": 61.24,
+    "scores": {
+      "keyword_hits": [
+        "25分鐘",
+        "番茄",
+        "休息",
+        "專注"
+      ],
+      "keyword_score": 10.0,
+      "length": 1618,
+      "overall": 10.0
+    },
+    "usage": {
+      "prompt_tokens": 50,
+      "completion_tokens": 1000,
+      "total_tokens": 1050,
+      "prompt_tokens_details": {
+        "cached_tokens": 3,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 1,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "status": "ok"
+  },
+  {
+    "domain": "time_planning",
+    "id": "time_3",
+    "label": "SMART 目標拆解",
+    "prompt": "我想在3個月內完成一個 LLM 相關的 side project 並放上 GitHub。請幫我用 SMART 原則拆解成可執行的里程碑，附上每週具體任務。",
+    "expect_keywords": [
+      "SMART",
+      "里程碑",
+      "週",
+      "具體"
+    ],
+    "response": "\n\n當然可以！我們可以使用 **SMART 原則**（Specific, Measurable, Achievable, Relevant, Time-bound）來為你這一個 **LLM 相關的 Side Project** 設定可執行的里程碑與週任務。以下是一個適合 **3個月內完成並上傳到 GitHub** 的計劃。\n\n---\n\n## 🎯 **專案目標（SMART）**\n- **Specific（具體）**：開發一個基於 LLM 的簡單應用程式，例如「LLM 驅動的問答助手」。\n- **Measurable（可衡量）**：完成一個可運行的應用、撰寫文檔、提交到 GitHub。\n- **Achievable（可達成）**：在 3 個月內完成，適合初級至中級開發者。\n- **Relevant（相關）**：與 LLM 有關，符合你學習或實作的目標。\n- **Time-bound（時間限制）**：3 個月內完成。\n\n---\n\n## 🧭 **三個月里程碑拆解**\n\n### 📅 第 1 個月（1-4週）：準備與基礎建設\n**目標**：明確專案方向、搭建開發環境、選擇 LLM 模型與工具。\n\n| 週數 | 任務 |\n|------|------|\n| 第1週 | 確定專案方向（例如：簡單的問答助手、聊天機器人、知識圖譜生成等）<br>選擇 LLM（如：Hugging Face、OpenAI、LLaMA 等）<br>註冊 API（如 OpenAI、Hugging Face）<br>安裝 Python 環境與必要庫（如 `transformers`, `torch`, `flask`） |\n| 第2週 | 研究 LLM 的基本用法（如 API 調用、Prompt Engineering）<br>建立專案結構（如 `main.py`, `requirements.txt`, `README.md`）<br>設定 GitHub 倉庫（初始化） |\n| 第3週 | 實作基礎功能（例如：調用 LLM 進行簡單問答）<br>測試程式運作是否正常<br>寫入基本的文檔與說明文件 |\n| 第4週 | 檢查程式穩定性與錯誤處理<br>提交首個 GitHub commit<br>寫入簡要的 README 與使用說明 |\n\n---\n\n### 📅 第 2 個月（5-8週）：功能擴充與優化\n**目標**：增加互動性、界面設計、加入簡單的 UI 或 API。\n\n| 週數 | 任務 |\n|------|------|\n| 第5週 | 開發互動功能（例如：透過 CLI 或 Web API 接收使用者輸入）<br>加入基本的錯誤訊息與輸出格式 |\n| 第6週 | 開發一個簡單的 Web 界面（例如：使用 Flask 或 Streamlit）<br>將 LLM 接入 Web 界面 |\n| 第7週 | 優化程式結構（例如：模組化、分離 API 與邏輯）<br>加入測試程式（例如：使用 `pytest`）<br>提交到 GitHub |\n| 第8週 | 實現一個完整的功能流程（如：使用者輸入 → LLM 處理 → 回傳結果）<br>撰寫完整的使用範例與文檔<br>準備發佈前的最終檢查 |\n\n---\n\n### 📅 第 3 個月（9-12週）：完善與釋出\n**目標**：完善功能、寫文檔、釋出到 GitHub。\n\n| 週數 | 任務 |\n|------|------|\n| 第9週 | 加入更多進階功能（如：多語言支援、歷史對話、記憶功能）<br>優化 LLM 的 prompt（例如：使用 template 或 prompt engineering） |\n| 第10週 | 寫入完整的 GitHub README（含安裝步驟、使用方式、開發者說明）<br>加入 `.gitignore` 和 `requirements.txt`<br>提交最終版本 |\n| 第11週 | 測試所有功能是否運作正常<br>整理專案結構，確保易讀易維護<br>準備釋出（可選擇 GitHub Pages 或 Heroku 部署） |\n| 第12週 | 提交最終版本到 GitHub<br>寫一篇專案簡介文章（可放於 README 或 blog）<br>分享至社群（",
+    "elapsed_sec": 62.0,
+    "scores": {
+      "keyword_hits": [
+        "SMART",
+        "里程碑",
+        "週",
+        "具體"
+      ],
+      "keyword_score": 10.0,
+      "length": 1771,
+      "overall": 10.0
+    },
+    "usage": {
+      "prompt_tokens": 59,
+      "completion_tokens": 1000,
+      "total_tokens": 1059,
+      "prompt_tokens_details": {
+        "cached_tokens": 4,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 1,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "status": "ok"
+  },
+  {
+    "domain": "time_planning",
+    "id": "time_4",
+    "label": "考前衝刺計畫",
+    "prompt": "期末考剩兩週，我有演算法和機器學習兩門課要考，演算法還差30%沒複習，機器學習差50%。請設計一份兩週衝刺計畫，每天可讀書時數要列清楚。",
+    "expect_keywords": [
+      "週",
+      "小時",
+      "演算法",
+      "機器學習",
+      "重點"
+    ],
+    "response": "\n\n好的！你有兩週時間衝刺兩門課：**演算法**（還差30%）和**機器學習**（還差50%）。我們需要一個**有系統、有重點、能有效分配時間**的衝刺計畫，讓你在這兩週內最大化複習效果。\n\n---\n\n## 🎯 整體目標\n\n- **演算法**：掌握基礎算法（如排序、圖、動態規劃）、常見算法設計技巧、重點題型。\n- **機器學習**：理解核心概念（如監督/非監督學習、分類/回歸、模型評估、過擬合、正則化等），掌握常見模型（如線性回歸、邏輯回歸、SVM、決策樹、KNN、K-Means）。\n\n---\n\n## 📅 2週衝刺計畫（每天學習時間：4-6小時）\n\n### 🔹 第1週（Day 1 - Day 7）\n\n| 日期 | 演算法 (2.5小時) | 機器學習 (2.5小時) | 備註 |\n|------|------------------|--------------------|------|\n| **Day 1** | 复习排序算法（Bubble, Quick, Merge）<br>掌握時間複雜度分析 | 复习機器學習基礎概念：<br>监督学习 vs 非监督学习<br>分类 vs 回归<br>過擬合與正則化 | 重點：基礎概念 + 算法時間複雜度 |\n| **Day 2** | 复习圖算法（DFS, BFS, Dijkstra, Kruskal）<br>掌握常用圖結構 | 复习模型評估指標（Accuracy, Precision, Recall, F1, ROC-AUC）<br>學習簡單線性回歸 | 重點：圖算法 + 模型評估 |\n| **Day 3** | 复习動態規劃基礎（如背包問題、斐波那契）<br>練習典型動態規劃題目 | 學習邏輯回歸（Logistic Regression）<br>理解SVM基本原理 | 重點：動態規劃 + 分類模型 |\n| **Day 4** | 复习Greedy算法（如活動選擇、霍夫曼編碼）<br>練習典型Greedy題目 | 學習KNN（K-Nearest Neighbor）<br>理解K-Means聚類 | 重點：Greedy + KNN/KMeans |\n| **Day 5** | 复习基礎數據結構（如Array, Linked List, Stack, Queue）<br>練習相關問題 | 复习機器學習流程：<br>資料預處理、模型訓練、評估 | 重點：數據結構 + ML流程 |\n| **Day 6** | 复习演算法設計技巧（Divide and Conquer, Backtracking）<br>練習題目 | 复习機器學習模型比較（優缺點、适用場景）<br>練習簡單的模型實現（如用Scikit-learn） | 重點：設計技巧 + 模型比較 |\n| **Day 7** | 總複習演算法重點（排序、圖、動態規劃、Greedy）<br>做一套模擬題 | 總複習機器學習重點（模型類型、評估、過擬合）<br>做一套模擬題 | 重點：總複習 + 模擬題練習 |\n\n---\n\n### 🔹 第2週（Day 8 - Day 14）\n\n| 日期 | 演算法 (3小時) | 機器學習 (3小時) | 備註 |\n|------|----------------|------------------|------|\n| **Day 8** | 做模擬題 + 查漏補缺<br>重點複習動態規劃與圖算法 | 做模擬題 + 查漏補缺<br>重點複習邏輯回歸、SVM、K-Means | 重點：模擬題 + 查漏補缺 |\n| **Day 9** | 練習演算法題目（如LeetCode或歷屆考題）<br>整理筆記與公式 | 練習機器學習題目（如模型選擇、過擬合問題）<br>整理筆記與公式 | 重點：題目練習 + 公式整理 |\n| **Day 10** | 練習演算法題目（如圖論、動態規劃",
+    "elapsed_sec": 62.77,
+    "scores": {
+      "keyword_hits": [
+        "週",
+        "小時",
+        "演算法",
+        "機器學習",
+        "重點"
+      ],
+      "keyword_score": 10.0,
+      "length": 1623,
+      "overall": 10.0
+    },
+    "usage": {
+      "prompt_tokens": 70,
+      "completion_tokens": 1000,
+      "total_tokens": 1070,
+      "prompt_tokens_details": {
+        "cached_tokens": 3,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 1,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "status": "ok"
+  },
+  {
+    "domain": "time_planning",
+    "id": "time_5",
+    "label": "深度工作",
+    "prompt": "Cal Newport 的「深度工作」理論如何應用在學生身上？請給出3個可以立刻實行的方法，並說明如何抵抗社群媒體的干擾。",
+    "expect_keywords": [
+      "深度",
+      "專注",
+      "社群",
+      "排程"
+    ],
+    "response": "\n\nCal Newport 的《深度工作》（Deep Work）理論強調的是：**在無干擾的環境中，專注於高價值的腦力工作**，以提升生產力和創造力。這對學生來說尤其重要，因為他們需要處理大量資訊、準備考試、進行研究或寫作，而這些工作都需要深度思考。\n\n以下是三個**學生可以立刻實行**的「深度工作」方法，以及如何**抵抗社群媒體干擾**的具體建議：\n\n---\n\n## ✅ 方法 1：設定「深度工作時間段」（Deep Work Block）\n\n**做法：**  \n每天固定安排一段時間（例如早上9點到11點），專門用來進行需要深度專注的任務，如寫作、複習、解決問題等。這段時間內，手機設為「飛行模式」或「請勿打擾」，並關閉所有社群媒體通知。\n\n**如何抵抗社群媒體干擾：**  \n- 使用「飛行模式」或「請勿打擾」模式，避免手機通知干擾。\n- 使用工具如 **Freedom** 或 **Cold Turkey** 來暫時封鎖社交媒體網站。\n- 告訴自己：「這段時間我只做這件事，其他人或訊息都必須等我完成任務後再處理。」\n\n---\n\n## ✅ 方法 2：使用「番茄工作法」（Pomodoro Technique）加強專注力\n\n**做法：**  \n將學習任務拆分成25分鐘的「番茄時間」，每完成一個番茄時間後休息5分鐘。這有助於訓練大腦在短時間內高度專注，同時保持效率。\n\n**如何抵抗社群媒體干擾：**  \n- 在番茄時間內，將手機放在另一個房間或放在視線之外。\n- 使用「番茄時鐘」App（如 **Focus To-Do** 或 **Pomodoro Timer**）來提醒自己，避免頻繁看手機。\n- 當休息時間到來時，才允許自己查看社群媒體，並設定一個時間限制（例如最多10分鐘）。\n\n---\n\n## ✅ 方法 3：建立「深度工作環境」（Deep Work Environment）\n\n**做法：**  \n選擇一個安靜、整潔、無干擾的空間來學習，例如圖書館、空教室或專屬書桌。這個環境應該只用來進行深度工作，讓大腦建立「這裡是學習空間」的條件反射。\n\n**如何抵抗社群媒體干擾：**  \n- 在學習空間內，不要放手機或任何可能吸引注意力的設備。\n- 把手機放在另一個房間，或使用物理方式（如手機鎖在抽屜裡）來減少接觸。\n- 用「環境暗示」提醒自己：「我在這裡是要深度學習，而不是閒逛社群媒體。」\n\n---\n\n## 🛡️ 總結：如何長期抵抗社群媒體干擾？\n\n1. **建立「數位斷食」習慣**：每天固定一段時間不看手機。\n2. **設定「數位意識」**：每次想打開社群媒體時，問自己「這會提升我的學習嗎？」\n3. **使用工具與策略**：如「請勿打擾」模式、封鎖網站的App、時間管理工具等。\n\n---\n\n透過這三種方法，學生可以更有效地進行深度學習，提升專注力與學習成效，同時遠離社群媒體的干擾。Cal Newport 的「深度工作」理念不僅適用於職場，更適合需要長期學習與思維訓練的學生。",
+    "elapsed_sec": 47.07,
+    "scores": {
+      "keyword_hits": [
+        "深度",
+        "專注",
+        "社群"
+      ],
+      "keyword_score": 7.5,
+      "length": 1249,
+      "overall": 8.4
+    },
+    "usage": {
+      "prompt_tokens": 47,
+      "completion_tokens": 769,
+      "total_tokens": 816,
+      "prompt_tokens_details": {
+        "cached_tokens": 3,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 1,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "status": "ok"
+  },
+  {
+    "domain": "time_planning",
+    "id": "time_hard_1",
+    "label": "OKR 框架（動態加測）",
+    "prompt": "請用 OKR 框架（Objectives and Key Results）幫一個想在半年內從初學者成為具備求職能力的前端工程師的大學生設定目標，要有3個 Objective，每個配2-3個 KR。",
+    "expect_keywords": [
+      "Objective",
+      "KR",
+      "半年",
+      "前端"
+    ],
+    "response": "\n\n當然可以！以下是一個為大學生設計的 **OKR（Objectives and Key Results）** 框架，目標是在 **半年內從前端開發初學者成長為具備求職能力的前端工程師**。這個 OKR 框架分為 **3 個 Objective**，每個 Objective 配有 **2-3 個 Key Results（KR）**，用以衡量目標的達成程度。\n\n---\n\n## 🎯 **Objective 1：建立扎實的前端開發基礎知識**\n\n### 📌 Key Results：\n1. 完成至少 **3 個前端開發線上課程**（如 Udemy、Coursera、FreeCodeCamp 或 YouTube 系列），並通過課程測驗。\n2. 熟練掌握 HTML、CSS、JavaScript 的基礎語法與常用 API，包括 DOM 操作與事件處理。\n3. 寫出至少 **3 個完整功能的網站或頁面**（如個人作品集、待辦事項應用、天氣應用等）。\n\n---\n\n## 🎯 **Objective 2：提升實際專案開發能力與工程思維**\n\n### 📌 Key Results：\n1. 完成至少 **2 個中大型前端專案**，並使用 Git 進行版本控制與團隊協作（可使用 GitHub Pages 部署）。\n2. 學習並實踐 **前端開發最佳實務**，例如：模組化開發、組件設計、狀態管理（如 Redux 或 Context API）。\n3. 閱讀並總結至少 **5 篇前端開發相關技術文章或部落格**，用於提升問題解決與設計思維。\n\n---\n\n## 🎯 **Objective 3：具備求職能力，準備前端工程師面試與作品集**\n\n### 📌 Key Results：\n1. 建立完整的 **個人作品集網站**，並包含專案說明、技術細節與可運行的 Demo。\n2. 練習至少 **10 個前端面試題**（包括 HTML/CSS/JS 基礎、常見算法問題與設計題）。\n3. 運用 LinkedIn 或其他平台建立個人品牌，至少 **提交 3 次求職申請** 或參與實習機會。\n\n---\n\n## ✅ OKR 小提醒：\n\n- 每週或每兩週進行一次 **OKR 檢核**，確認進度是否符合預期。\n- 可搭配 **學習計畫表**（如每日學習時間、專案開發節點）來提高執行力。\n- 建議加入前端開發社群（如 GitHub、Stack Overflow、Reddit 或 Discord 小組）來持續學習與交流。\n\n如果你需要我幫你設計一個 **學習週計畫表** 或 **作品集網站結構建議**，也可以告訴我！我會根據你的時間安排與資源提供更個性化的建議。",
+    "elapsed_sec": 39.42,
+    "scores": {
+      "keyword_hits": [
+        "Objective",
+        "KR",
+        "半年",
+        "前端"
+      ],
+      "keyword_score": 10.0,
+      "length": 1118,
+      "overall": 10.0
+    },
+    "usage": {
+      "prompt_tokens": 65,
+      "completion_tokens": 641,
+      "total_tokens": 706,
+      "prompt_tokens_details": {
+        "cached_tokens": 3,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 1,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "status": "ok"
+  }
+]
