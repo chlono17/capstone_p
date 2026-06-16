@@ -4,21 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "5927951bfa570ea8",
+        "id": "2b0603dc9bf49f4e",
         "type": "tabs",
         "children": [
           {
-            "id": "6f994e2d13555457",
+            "id": "cb0d538dedbc521e",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "notes/2026-05/DeepSeek-最新視覺-AI-技術解析與疑問探討.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "DeepSeek-最新視覺-AI-技術解析與疑問探討"
+              "title": "新分頁"
             }
           }
         ]
@@ -194,8 +190,18 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "6f994e2d13555457",
+  "active": "cb0d538dedbc521e",
   "lastOpenFiles": [
+    "notes/2026-06/TxT360-資料集結構與去重訓練邏輯.md",
+    "notes/2026-06",
+    "notes/未命名.base",
+    "notes/未命名.md",
+    "未命名",
+    "notes/2026-06-16.md",
+    "未命名 2.canvas",
+    "未命名.canvas",
+    "未命名 1.canvas",
+    "notes/2026-05/DeepSeek-最新視覺-AI-技術解析與疑問探討.md",
     "raw/sessions/3b869b13237d4f09beb0d53bd3fb94c6.json",
     "raw/sessions/8fce239ce81643d2b3ddf5f1c7fbedf4.json",
     "raw/sessions/d3250760a51f4369a7dec651044d796e.json",
@@ -206,17 +212,12 @@
     "notes/2026-05/Transformer-技術在大型語言模型中的應用與核心概念解析.md",
     "notes/2026-05/RAG-vs.-微調：實際應用指南.md",
     "notes/2026-05/Nemotron-3-Nano-Omni-視覺處理應用指南.md",
-    "notes/2026-05/DeepSeek-最新視覺-AI-技術解析與疑問探討.md",
     "templates/learning-note.md",
     "progress.md",
     "conflict-files-obsidian-git.md",
     "notes/2026-05/AI工程應用與挑戰：提示詞、上下文與Harness工程.md",
-    "raw/2026-05/AI工程應用與挑戰：提示詞、上下文與Harness工程.json",
-    "raw/sessions/54f237ba9cc04fb580ce75d4f7808d86.json",
     "notes/2026-04/CLAUDE設定指南：從基礎到高階應用.md",
     "notes/2026-04/如何管理Claude的工作細節與進度.md",
-    "raw/2026-04/CLAUDE設定指南：從基礎到高階應用.json",
-    "raw/sessions/be5cd4540e6744fdb4bd5ed610a703c2.json",
     "notes/2026-04/讓Claude-Code更有效率的四個核心設定.md",
     "notes/2026-04/CLAUDE設定指南精簡版.md",
     "notes/2026-04/notebookLM.md",
