@@ -1,24 +1,24 @@
 {
   "main": {
-    "id": "0480846aa81beffa",
+    "id": "27c1c77ec2fa0ac2",
     "type": "split",
     "children": [
       {
-        "id": "5927951bfa570ea8",
+        "id": "330ae43162f451ff",
         "type": "tabs",
         "children": [
           {
-            "id": "6f994e2d13555457",
+            "id": "656e3a2491e7d476",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "notes/2026-06/從Windows轉換到Linux的準備與注意事項.md",
+                "file": "llm360.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "從Windows轉換到Linux的準備與注意事項"
+              "title": "llm360"
             }
           }
         ]
@@ -27,15 +27,15 @@
     "direction": "vertical"
   },
   "left": {
-    "id": "4c2a9c1d9d04eb69",
+    "id": "f4c8576c5081974f",
     "type": "split",
     "children": [
       {
-        "id": "c49a864293bbeda0",
+        "id": "3e2051e5f3a18c93",
         "type": "tabs",
         "children": [
           {
-            "id": "dfd999effc39e0e2",
+            "id": "77b66949252d237c",
             "type": "leaf",
             "state": {
               "type": "file-explorer",
@@ -44,11 +44,11 @@
                 "autoReveal": false
               },
               "icon": "lucide-folder-closed",
-              "title": "Files"
+              "title": "檔案瀏覽器"
             }
           },
           {
-            "id": "943bbfca975c9abe",
+            "id": "ab25336ba26c56e9",
             "type": "leaf",
             "state": {
               "type": "search",
@@ -65,7 +65,7 @@
             }
           },
           {
-            "id": "581c06fec991b6c4",
+            "id": "299f346c22b525e9",
             "type": "leaf",
             "state": {
               "type": "bookmarks",
@@ -81,20 +81,19 @@
     "width": 300
   },
   "right": {
-    "id": "23cd2cfc0e372dea",
+    "id": "74d0d771c5057822",
     "type": "split",
     "children": [
       {
-        "id": "167013195150fe7c",
+        "id": "ad55f1ca7bd970f8",
         "type": "tabs",
         "children": [
           {
-            "id": "3a371d8b4e289343",
+            "id": "07348fd7321f8c33",
             "type": "leaf",
             "state": {
               "type": "backlink",
               "state": {
-                "file": "notes/2026-04/notebookLM.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,25 +103,24 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for notebookLM"
+              "title": "Backlinks"
             }
           },
           {
-            "id": "8bf04b3346d8628a",
+            "id": "a49ef6f20cf3106b",
             "type": "leaf",
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "notes/2026-04/notebookLM.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from notebookLM"
+              "title": "Outgoing links"
             }
           },
           {
-            "id": "2cae6c51ad7cd735",
+            "id": "dd1133c63c5174b0",
             "type": "leaf",
             "state": {
               "type": "tag",
@@ -137,7 +135,7 @@
             }
           },
           {
-            "id": "2187f607c672eac7",
+            "id": "f6ce9235201b4e46",
             "type": "leaf",
             "state": {
               "type": "all-properties",
@@ -151,22 +149,21 @@
             }
           },
           {
-            "id": "8168b2fca3198fac",
+            "id": "abd11be8bb3f6a8a",
             "type": "leaf",
             "state": {
               "type": "outline",
               "state": {
-                "file": "notes/2026-04/notebookLM.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of notebookLM"
+              "title": "Outline"
             }
           },
           {
-            "id": "a54b84f490f12aa7",
+            "id": "5990aea80627e39f",
             "type": "leaf",
             "state": {
               "type": "git-view",
@@ -184,44 +181,19 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "switcher:Open quick switcher": false,
-      "graph:Open graph view": false,
-      "canvas:Create new canvas": false,
-      "daily-notes:Open today's daily note": false,
-      "templates:Insert template": false,
-      "command-palette:Open command palette": false,
-      "bases:Create new base": false,
+      "switcher:開啟快速切換": false,
+      "graph:查看關聯圖": false,
+      "canvas:建立新畫布": false,
+      "daily-notes:開啟今天的每日筆記": false,
+      "templates:插入模板": false,
+      "command-palette:開啟命令面板": false,
+      "bases:建立新的 base": false,
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "6f994e2d13555457",
+  "active": "656e3a2491e7d476",
   "lastOpenFiles": [
-    "notes/2026-05/Nemotron-3-Nano-Omni-視覺處理應用指南.md",
-    "raw/2026-06/從Windows轉換到Linux的準備與注意事項.json",
-    "raw/2026-06",
-    "notes/2026-06/從Windows轉換到Linux的準備與注意事項.md",
-    "notes/2026-06",
-    "notes/2026-05/DeepSeek-最新視覺-AI-技術解析與疑問探討.md",
-    "raw/sessions/3b869b13237d4f09beb0d53bd3fb94c6.json",
-    "raw/sessions/8fce239ce81643d2b3ddf5f1c7fbedf4.json",
-    "raw/sessions/d3250760a51f4369a7dec651044d796e.json",
-    "raw/sessions/122787bed6b64c1883bb3ba6e6dd3699.json",
-    "raw/sessions/e4a2ed3d6def4a1d8710f6e4a56be96f.json",
-    "raw/sessions/c2df2ac5453d44318560db29ca73df7e.json",
-    "raw/sessions/5bea191fcbe449d79d9041dc1b9ce026.json",
-    "notes/2026-05/Transformer-技術在大型語言模型中的應用與核心概念解析.md",
-    "notes/2026-05/RAG-vs.-微調：實際應用指南.md",
-    "templates/learning-note.md",
-    "progress.md",
-    "conflict-files-obsidian-git.md",
-    "notes/2026-05/AI工程應用與挑戰：提示詞、上下文與Harness工程.md",
-    "notes/2026-04/CLAUDE設定指南：從基礎到高階應用.md",
-    "notes/2026-04/如何管理Claude的工作細節與進度.md",
-    "notes/2026-04/讓Claude-Code更有效率的四個核心設定.md",
-    "notes/2026-04/CLAUDE設定指南精簡版.md",
-    "notes/2026-04/notebookLM.md",
-    "notes/2026-04/進一步-refinement-NotebookLM-模型.md",
-    "notes/2026-04/--notebooklm-input-的核心重點-.md",
-    "notes/2026-04/note-2026-04-29.md"
+    "llm360.md",
+    "test.md"
   ]
 }

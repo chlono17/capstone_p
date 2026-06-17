@@ -1,0 +1,12 @@
+# Obsidian 本地 UI 狀態（每個人不同，不應同步）
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/workspaces.json
+
+# Obsidian cache
+.obsidian/cache
+.trash/
+
+# 系統檔
+.DS_Store
+Thumbs.db

@@ -1,7 +1,7 @@
 ---
 title: DeepSeek 最新視覺 AI 技術解析與疑問探討
 date: 2026-05-22
-author: yourname
+author: Curtis
 model: qwen2-7b-instruct
 source: https://notebooklm.google.com/notebook/f64cf873-6710-4142-91d4-d27dc8f41547
 tags:
