@@ -4,17 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "2b0603dc9bf49f4e",
+        "id": "80af3ac24cffbe8f",
         "type": "tabs",
         "children": [
           {
-            "id": "cb0d538dedbc521e",
+            "id": "474499a4ffda01fb",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "notes/2026-06/TxT360-資料集結構與去重訓練邏輯.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "新分頁"
+              "title": "TxT360-資料集結構與去重訓練邏輯"
             }
           }
         ]
@@ -40,7 +44,7 @@
                 "autoReveal": false
               },
               "icon": "lucide-folder-closed",
-              "title": "檔案瀏覽器"
+              "title": "Files"
             }
           },
           {
@@ -180,46 +184,39 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "switcher:開啟快速切換": false,
-      "graph:查看關聯圖": false,
-      "canvas:建立新畫布": false,
-      "daily-notes:開啟今天的每日筆記": false,
-      "templates:插入模板": false,
-      "command-palette:開啟命令面板": false,
-      "bases:建立新的 base": false,
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false,
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "cb0d538dedbc521e",
+  "active": "474499a4ffda01fb",
   "lastOpenFiles": [
-    "notes/2026-06/TxT360-資料集結構與去重訓練邏輯.md",
-    "notes/2026-06",
-    "notes/未命名.base",
-    "notes/未命名.md",
-    "未命名",
-    "notes/2026-06-16.md",
-    "未命名 2.canvas",
-    "未命名.canvas",
-    "未命名 1.canvas",
-    "notes/2026-05/DeepSeek-最新視覺-AI-技術解析與疑問探討.md",
-    "raw/sessions/3b869b13237d4f09beb0d53bd3fb94c6.json",
-    "raw/sessions/8fce239ce81643d2b3ddf5f1c7fbedf4.json",
-    "raw/sessions/d3250760a51f4369a7dec651044d796e.json",
-    "raw/sessions/122787bed6b64c1883bb3ba6e6dd3699.json",
-    "raw/sessions/e4a2ed3d6def4a1d8710f6e4a56be96f.json",
-    "raw/sessions/c2df2ac5453d44318560db29ca73df7e.json",
-    "raw/sessions/5bea191fcbe449d79d9041dc1b9ce026.json",
     "notes/2026-05/Transformer-技術在大型語言模型中的應用與核心概念解析.md",
+    "notes/2026-06/TxT360-資料集結構與去重訓練邏輯.md",
     "notes/2026-05/RAG-vs.-微調：實際應用指南.md",
     "notes/2026-05/Nemotron-3-Nano-Omni-視覺處理應用指南.md",
-    "templates/learning-note.md",
-    "progress.md",
-    "conflict-files-obsidian-git.md",
+    "notes/2026-05/DeepSeek-最新視覺-AI-技術解析與疑問探討.md",
     "notes/2026-05/AI工程應用與挑戰：提示詞、上下文與Harness工程.md",
+    "notes/2026-05/-LLM中的Tokenization機制與BPE演算法探究-.md",
+    "notes/2026-06",
+    "raw/2026-05/DeepSeek-最新視覺-AI-技術解析與疑問探討.json",
+    "raw/sessions/6b9c67d3f0374cd38e7d93b58e185522.json",
+    "raw/2026-05/AI工程應用與挑戰：提示詞、上下文與Harness工程.json",
+    "raw/sessions/54f237ba9cc04fb580ce75d4f7808d86.json",
     "notes/2026-04/CLAUDE設定指南：從基礎到高階應用.md",
     "notes/2026-04/如何管理Claude的工作細節與進度.md",
+    "raw/2026-04/CLAUDE設定指南：從基礎到高階應用.json",
+    "raw/sessions/be5cd4540e6744fdb4bd5ed610a703c2.json",
     "notes/2026-04/讓Claude-Code更有效率的四個核心設定.md",
     "notes/2026-04/CLAUDE設定指南精簡版.md",
+    "raw/2026-04/如何管理Claude的工作細節與進度.json",
+    "raw/sessions/6fc87f4ea154411ea6b5d281f3688c3e.json",
+    "raw/2026-04/CLAUDE設定指南精簡版.json",
     "notes/2026-04/notebookLM.md",
     "notes/2026-04/進一步-refinement-NotebookLM-模型.md",
     "notes/2026-04/--notebooklm-input-的核心重點-.md",
