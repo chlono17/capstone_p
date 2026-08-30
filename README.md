@@ -1,33 +1,25 @@
-# Autonomous Knowledge Synthesizer
+# IT 事件助理
 
-輸出驅動的學習社群平台。AI 降低輸出門檻，不替代輸出。
+協助 IT 維運事件處理的智慧助理，涵蓋智慧洞察、人員調度、總結追蹤、知識沉澱四大功能。
 
-- **技術核心**：本地 LLM（Ollama）+ RAG + Agent + MCP
-- **目標用戶**：長庚大學學生
-- **正式開發**：2026/9 啟動
+- **技術核心**：LangGraph + RAG + MCP，以本地部署為主
+- **驗證策略**：主場景用團隊自身開發歷程（GitHub Issues/PR/CI log），公開資料集（LogHub、Kaggle ticket dataset schema、HuggingFace IT ticket 分類）補強核心模型能力驗證
 
 ---
 
 ## 系統架構
 
 ```
-┌─────────────────────────── INPUT ───────────────────────────┐
-│  手寫/相機(OCR)  │  語音(STT)  │  文字/Markdown  │  網頁/PDF  │
+┌───────────────────────── 共用基礎層 ─────────────────────────┐
+│      LangGraph Agent 框架  │  RAG 檢索  │  MCP 工具整合       │
+│                      本地部署（推論後端）                     │
 └──────────────────────────────┬──────────────────────────────┘
                                ↓
-┌─────────────────── AGENT 處理核心（本地 LLM + MCP）──────────┐
-│  知識萃取(Q&A對話)  │  格式化(手寫→MD)  │  輔助寫作(架構提示)  │
-│  本地 LLM(Ollama)  │  RAG 檢索         │  Podcast 生成(TTS)  │
-└──────────────┬──────────────────────────────────────────────┘
-               ↓
-┌──────────────────────────── STORE ──────────────────────────┐
-│  Vector DB(ChromaDB/FAISS)  │  結構化DB(用戶/貼文/標籤)  │  媒體儲存  │
-└──────────────┬──────────────────────────────────────────────┘
-               ↓
-┌──────────────────────── FEED（學校用戶）────────────────────┐
-│  知識卡片(標籤/摘要/問題)  │  Podcast 播放  │  互動(問題/留言)  │
-│  發文介面(使用者寫 + Agent 旁輔)  │  個人動態(學習狀況)         │
-└─────────────────────────────────────────────────────────────┘
+┌──────────┬──────────────┬──────────────┬─────────────────────┐
+│ 智慧洞察  │  人員調度     │  總結追蹤     │  知識沉澱            │
+│ log/SOP  │  行事曆/排班   │  事件報告生成  │  回寫知識庫          │
+│ 比對      │  API 整合     │              │                     │
+└──────────┴──────────────┴──────────────┴─────────────────────┘
 ```
 
 詳細說明見 [`docs/architecture.md`](docs/architecture.md)。
@@ -42,12 +34,13 @@ capstone_project/
 │   ├── architecture.md    # 系統架構說明
 │   └── decisions/         # ADR（架構決策記錄）
 ├── src/                   # 正式系統程式碼
-│   ├── agent/             # AGENT 層：知識萃取、RAG、Podcast 生成
-│   ├── store/             # STORE 層：Vector DB、結構化 DB、媒體儲存
-│   ├── feed/              # FEED 層：知識卡片、互動、發文介面
-│   └── input/             # INPUT 層：OCR、STT、Markdown、PDF
+│   ├── insight/           # 智慧洞察：log/SOP 比對
+│   ├── dispatch/          # 人員調度：行事曆/排班
+│   ├── tracking/          # 總結追蹤：事件報告生成
+│   ├── knowledge/         # 知識沉澱：回寫知識庫
+│   └── shared/            # 共用基礎：LangGraph Agent、RAG、MCP、本地部署
 ├── sandbox/               # 學習沙盒（n8n prototype，非正式系統）
-│   └── n8n-prototype/     # n8n workflow + Obsidian vault
+│   └── n8n-prototype/     # 舊題目時期的 n8n workflow 練習
 ├── notes/                 # 工具學習筆記（Docker、Git）
 ├── scripts/               # 工具腳本
 └── tests/                 # 測試
@@ -57,17 +50,9 @@ capstone_project/
 
 ## 快速開始
 
-### 啟動沙盒（n8n + LM Studio）
+系統仍在設計階段，`src/` 底下目前只有各模組的 README 說明，尚未有實際程式碼。
 
-```bash
-cd sandbox/n8n-prototype
-docker compose up -d
-```
-
-- n8n UI：`http://localhost:5678`
-- LM Studio API：`http://localhost:1234`
-
-環境變數設定請參考 `sandbox/n8n-prototype/SETUP.md`。
+`sandbox/n8n-prototype/` 是舊題目時期留下的學習沙盒，啟動方式見該目錄下 `SETUP.md`，與現在的 IT 事件助理架構無直接對應關係。
 
 ---
 
@@ -75,7 +60,7 @@ docker compose up -d
 
 | 角色 | 子系統 |
 |------|--------|
-| 組員 A | Vector Storage + RAG |
-| 組員 B | Agent 框架 + MCP |
-| 組員 C | 本地部署 + 推論優化 |
-| chuYi | 整體架構 + Feed 設計 + 管理 |
+| 組員 A | 智慧洞察（log/SOP 比對） |
+| 組員 B | 人員調度（行事曆/排班） |
+| 組員 C | 總結追蹤（事件報告生成） |
+| 組員 D | 知識沉澱 + 整體架構 + 管理 |

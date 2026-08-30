@@ -7,44 +7,46 @@
 
 ## 專題基本資訊
 
-- **專題名稱**：Autonomous Knowledge Synthesizer（自主知識合成器）
-- **技術核心**：LLM + RAG + Agent + MCP，以本地部署為主
-- **定位**：輸出驅動的學習社群平台，AI 降低輸出門檻，不替代輸出
-- **目標範圍**：學校用戶（長庚大學），可申請國科會大專生研究計畫
-- **GitHub Repo**：`chlono17/capstone_p`
-- **Tech Lead**：chuYi（angelo95chen117）
-- **團隊規模**：3–4 人，正式開始：2026/9
+- **專題名稱**：IT 事件助理
+- **技術核心**：LangGraph + RAG + MCP，以本地部署為主
+- **定位**：協助 IT 維運事件處理的智慧助理，涵蓋智慧洞察、人員調度、總結追蹤、知識沉澱四大功能
+- **驗證策略**：主場景用團隊自身開發歷程（GitHub Issues/PR/CI log）當真實資料，公開資料集（LogHub、Kaggle ticket dataset schema、HuggingFace IT ticket 分類）補強核心模型能力驗證
+- **GitHub Repo**：本 repo
+- **Tech Lead**：（待定）
+- **團隊規模**：（待定）
+
+> Repo 為 public：本文件與其他文件已避免寫出學校名稱、真實姓名/GitHub handle、確切人數與時程。但 git remote 本身已包含 GitHub 使用者代稱，文件層級無法做到完全匿名，若需要徹底匿名須另外處理 org/repo 名稱本身。
 
 ---
 
-## 系統架構（Path A，細節待組員確認後可能調整）
+## 系統架構（v0.1，細節待組員確認後可能調整）
 
 ```
-┌─────────────────────────── INPUT ───────────────────────────┐
-│  手寫/相機(OCR)  │  語音(STT)  │  文字/Markdown  │  網頁/PDF  │
+┌───────────────────────── 共用基礎層 ─────────────────────────┐
+│      LangGraph Agent 框架  │  RAG 檢索  │  MCP 工具整合       │
+│                      本地部署（推論後端）                     │
 └──────────────────────────────┬──────────────────────────────┘
                                ↓
-┌─────────────────── AGENT 處理核心（本地 LLM + MCP）──────────┐
-│  知識萃取(Q&A對話)  │  格式化(手寫→MD)  │  輔助寫作(架構提示)  │
-│  本地 LLM(Ollama)  │  RAG 檢索         │  Podcast 生成(TTS)  │
-└──────────────┬──────────────────────────────────────────────┘
-               ↓
-┌──────────────────────────── STORE ──────────────────────────┐
-│  Vector DB(ChromaDB/FAISS)  │  結構化DB(用戶/貼文/標籤)  │  媒體儲存  │
-└──────────────┬──────────────────────────────────────────────┘
-               ↓
-┌──────────────────────── FEED（學校用戶）────────────────────┐
-│  知識卡片(標籤/摘要/問題)  │  Podcast 播放  │  互動(問題/留言)  │
-│  發文介面(使用者寫 + Agent 旁輔)  │  個人動態(學習狀況)         │
-└─────────────────────────────────────────────────────────────┘
+┌──────────┬──────────────┬──────────────┬─────────────────────┐
+│ 智慧洞察  │  人員調度     │  總結追蹤     │  知識沉澱            │
+│ log/SOP  │  行事曆/排班   │  事件報告生成  │  回寫知識庫          │
+│ 比對      │  API 整合     │              │                     │
+└──────────┴──────────────┴──────────────┴─────────────────────┘
 ```
 
-### n8n 沙盒（練習用，非最終系統）
-目前 `sandbox/n8n-prototype/` 是學習沙盒，讓團隊熟悉本地部署流程、Obsidian workflow、
-理解本地模型限制，為正式開發做準備。已完成：
-- `docker-compose.yml`：n8n + LM Studio（port 5678 / 1234）
-- workflow：`知識萃取對話系統`、`notes-to-podcast`
-- Obsidian vault：`sandbox/n8n-prototype/vault/`，Git 同步中
+### 資料來源策略
+
+| 功能 | 主資料來源 | 補強資料來源 |
+|------|-----------|-------------|
+| 智慧洞察 | 團隊自身 GitHub Issues、PR 討論、CI log | LogHub（HDFS/BGL/Thunderbird，公開、有異常標籤，學界標準 benchmark） |
+| 人員調度 | 團隊自身行事曆/排班 | 不需要外部資料集，屬通用 API 整合能力 |
+| 總結追蹤 | 團隊真實踩過的 bug/issue 討論串 | Kaggle customer-support-ticket-dataset（只借欄位 schema：type/subject/description/resolution/priority，不用其消費性支援內容） |
+| 知識沉澱 | GitHub Issues 本身、知識庫（見下方） | HuggingFace IT ticket 分類資料集，用來校準知識庫標籤體系 |
+
+> 核心邏輯：只有「智慧洞察」真正需要一批已知結論的歷史 case 才能驗證比對準不準，所以用公開、有 ground truth 標籤的 log 資料集驗證；其餘三個功能本質上是團隊自身協作資料就是最好的訓練/demo 素材，不需要模擬企業情境。
+
+### n8n 沙盒（舊題目時期練習，非最終系統）
+`sandbox/n8n-prototype/` 是舊題目（Autonomous Knowledge Synthesizer）時期的學習沙盒，讓團隊熟悉本地部署流程、n8n workflow，概念上不再直接對應現在的四大功能。其 Obsidian vault 內容已搬遷至 Linear Document，資料夾已從 repo 移除（備份於本機）。sandbox 本身（docker-compose、workflow）是否保留待後續決定。
 
 ---
 
@@ -72,12 +74,12 @@
 
 | Linear Project | 對應架構層 | 主要 Issues |
 |----------------|-----------|-------------|
-| RAG 知識庫子系統 | STORE + AGENT（RAG） | CAP-7, CAP-8, CAP-9 |
-| Agent & MCP 子系統 | AGENT（知識萃取、格式化、輔助寫作） | CAP-10 |
-| 本地部署 & 推論優化子系統 | INPUT + AGENT（LLM 底層） | CAP-6, CAP-11, CAP-12 |
-| ⚠️ 待新增：Feed 社群子系統 | FEED | 尚未建立 |
+| ⚠️ 待新增：智慧洞察子系統 | 智慧洞察（log/SOP 比對） | 尚未建立 |
+| ⚠️ 待新增：人員調度子系統 | 人員調度（行事曆/排班） | 尚未建立 |
+| ⚠️ 待新增：總結追蹤子系統 | 總結追蹤（事件報告生成） | 尚未建立 |
+| ⚠️ 待新增：知識沉澱子系統 | 知識沉澱（回寫知識庫） | 尚未建立 |
 
-> Project 分類待整理，目前反映的是 Roadmap 結構而非系統架構，需對齊。
+> Project 分類待整理，題目已轉向 IT 事件助理，舊題目（RAG 知識庫/Agent & MCP/本地部署/Feed 社群）的 Project 分類已不適用。
 
 ### Issue 命名規範
 - Roadmap 學習：`[Engineer-N]` / `[Scientist-N]` 前綴
@@ -93,13 +95,13 @@
 - 工作流：對話釐清需求 → 建 issue（貼 label）→ 開 branch → 實作 → PR
 
 ### GitHub
-- Repo：`chlono17/capstone_p`
-- Branch 命名：從 Linear issue 自動生成（`angelo95chen117/cap-N-...`）
+- Repo：本 repo
+- Branch 命名：從 Linear issue 自動生成（`<github-handle>/cap-N-...`）
 - PR 合併後自動推進 Linear issue 狀態
 
-### Obsidian Vault
-- 路徑：`sandbox/n8n-prototype/vault/`
-- 結構：`vault/notes/YYYY-MM/`，每 10 分鐘 auto-commit
+### 共筆 / 知識庫
+- 共筆改用 Linear Document（原本規劃的 Obsidian vault 已淘汰，內容搬遷至 Linear）
+- 任務與進度一律以 Linear issue 追蹤，不再依賴 vault 裡的 `progress.md`
 
 ---
 
@@ -117,28 +119,19 @@
 - 若討論開始蔓延會主動拉回
 
 ### 分工構想（待組員確認）
-| 角色 | 子系統 | Roadmap 對應 |
-|------|--------|-------------|
-| 組員 A | Vector Storage + RAG | Engineer 2–3 |
-| 組員 B | Agent 框架 + MCP | Engineer 5 |
-| 組員 C | 本地部署 + 推論優化 | Engineer 6–7 |
-| chuYi | 整體架構 + Feed 設計 + 管理 | 全段 |
+| 角色 | 子系統 |
+|------|--------|
+| 組員 A | 智慧洞察（log/SOP 比對） |
+| 組員 B | 人員調度（行事曆/排班） |
+| 組員 C | 總結追蹤（事件報告生成） |
+| 組員 D | 知識沉澱 + 整體架構 + 管理 |
 
 ---
 
 ## 環境快速參考
 
-```bash
-docker compose up -d                           # 啟動
-docker compose down                            # 停止
-docker compose logs -f n8n                     # 看 log
-docker compose --profile import up n8n-import  # 匯入 workflow
-```
-
-- n8n UI：`http://localhost:5678`
-- LM Studio API：`http://localhost:1234`
-- Obsidian Vault：`./sandbox/n8n-prototype/vault/`
+`sandbox/n8n-prototype/` 的 docker/n8n 指令仍可用於該學習沙盒（見該目錄下 SETUP.md），與正式系統無關，故不在此重複列出。
 
 ---
 
-*最後更新：2026-05-10 | 架構版本：Path A v0.1（待組員確認）*
+*最後更新：2026-08-31 | 架構版本：v0.1（待組員確認）*

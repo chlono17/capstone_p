@@ -1,7 +1,7 @@
 # CLAUDE.md — para-ai-system
 
-> ⚠️ 這是學習沙盒 repo，目的是熟悉本地部署流程與 n8n workflow。
-> 正式系統請見 `chlono17/capstone_p`（Dr-PenPen org）。
+> ⚠️ 這是學習沙盒，目的是熟悉本地部署流程與 n8n workflow。
+> 正式系統請見主 repo。
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
@@ -9,8 +9,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 專題背景
 
-大學畢業專題，主題「個人知識庫 + AI Agent」。四人組，全 AI major。
-- GitHub org：Dr-PenPen
+大學畢業專題，主題「個人知識庫 + AI Agent」（舊題目，已轉向 IT 事件助理，見主 repo CLAUDE.md）。四人組，全 AI major。
 - 組員：2 台 Mac M1、2 台 Windows
 
 ## 系統目標
@@ -104,7 +103,7 @@ n8n UI：http://localhost:5678
 | `N8N_ENCRYPTION_KEY` | 32 字元隨機字串 | `openssl rand -hex 16` |
 | `LLM_BASE_URL` | LLM API endpoint | `http://host.docker.internal:1234/v1` |
 | `LLM_MODEL` | 模型名稱 | Mac：`mlx-community/Llama-3.2-3B-Instruct-4bit` |
-| `AUTHOR_NAME` | 每人填自己名字 | `chuyi` |
+| `AUTHOR_NAME` | 每人填自己名字 | `<your-name>` |
 | `CLAUDE_API_KEY` | Anthropic API（podcast 用） | `sk-ant-...` |
 | `TTS_API_KEY` / `TTS_API_URL` | ElevenLabs 或 OpenAI TTS | 選填 |
 
