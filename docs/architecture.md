@@ -97,14 +97,6 @@
 
 ---
 
-## 沙盒（sandbox/n8n-prototype）
+## 舊沙盒（已淘汰）
 
-`sandbox/n8n-prototype/` 是舊題目（Autonomous Knowledge Synthesizer）時期的學習沙盒，讓團隊熟悉本地部署流程與 n8n workflow 設計。概念上不再直接對應現在的四大功能。
-
-其 Obsidian vault 內容（學習筆記、進度紀錄、backlog）已搬遷至 Linear Document，vault 相關資料夾已從 repo 移除（備份於本機）。sandbox 本身（docker-compose、n8n workflow）是否保留，待後續獨立討論。
-
-啟動方式（若要參考舊 workflow）：
-```bash
-cd sandbox/n8n-prototype
-docker compose up -d
-```
+舊題目（Autonomous Knowledge Synthesizer）時期的學習沙盒 `sandbox/n8n-prototype/`（n8n + Obsidian vault 練習）與 `sandbox/distributed-llm/`（Exo 分散式推論實驗）皆已從 repo 移除，概念上也不再對應現在的四大功能。淘汰原因、內容搬遷去向（Linear Document）與本機備份位置見 [`docs/decisions/0001-舊沙盒與實驗性資料夾清理.md`](decisions/0001-舊沙盒與實驗性資料夾清理.md)。

@@ -1,9 +1,0 @@
-.env
-n8n_data/
-*.mp3
-*.mp4
-.DS_Store
-__pycache__/
-vault/raw/
-vault/notes/.obsidian/
-

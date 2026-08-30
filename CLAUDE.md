@@ -45,8 +45,8 @@
 
 > 核心邏輯：只有「智慧洞察」真正需要一批已知結論的歷史 case 才能驗證比對準不準，所以用公開、有 ground truth 標籤的 log 資料集驗證；其餘三個功能本質上是團隊自身協作資料就是最好的訓練/demo 素材，不需要模擬企業情境。
 
-### n8n 沙盒（舊題目時期練習，非最終系統）
-`sandbox/n8n-prototype/` 是舊題目（Autonomous Knowledge Synthesizer）時期的學習沙盒，讓團隊熟悉本地部署流程、n8n workflow，概念上不再直接對應現在的四大功能。其 Obsidian vault 內容已搬遷至 Linear Document，資料夾已從 repo 移除（備份於本機）。sandbox 本身（docker-compose、workflow）是否保留待後續決定。
+### 舊沙盒與實驗性資料夾
+舊題目時期的 `sandbox/n8n-prototype/`（n8n + Obsidian vault 練習）與 `sandbox/distributed-llm/`（Exo 分散式推論實驗）皆已淘汰、從 repo 移除。淘汰原因、內容搬遷去向與本機備份位置見 [`docs/decisions/0001-舊沙盒與實驗性資料夾清理.md`](docs/decisions/0001-舊沙盒與實驗性資料夾清理.md)。
 
 ---
 
@@ -130,7 +130,7 @@
 
 ## 環境快速參考
 
-`sandbox/n8n-prototype/` 的 docker/n8n 指令仍可用於該學習沙盒（見該目錄下 SETUP.md），與正式系統無關，故不在此重複列出。
+舊沙盒已淘汰移除，見 `docs/decisions/0001-舊沙盒與實驗性資料夾清理.md`，此處不再列環境指令。
 
 ---
 

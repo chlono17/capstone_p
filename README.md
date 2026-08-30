@@ -39,9 +39,7 @@ capstone_project/
 │   ├── tracking/          # 總結追蹤：事件報告生成
 │   ├── knowledge/         # 知識沉澱：回寫知識庫
 │   └── shared/            # 共用基礎：LangGraph Agent、RAG、MCP、本地部署
-├── sandbox/               # 學習沙盒（n8n prototype，非正式系統）
-│   └── n8n-prototype/     # 舊題目時期的 n8n workflow 練習
-├── notes/                 # 工具學習筆記（Docker、Git）
+├── notes/                 # 工具學習筆記（Git）
 ├── scripts/               # 工具腳本
 └── tests/                 # 測試
 ```
@@ -52,7 +50,7 @@ capstone_project/
 
 系統仍在設計階段，`src/` 底下目前只有各模組的 README 說明，尚未有實際程式碼。
 
-`sandbox/n8n-prototype/` 是舊題目時期留下的學習沙盒，啟動方式見該目錄下 `SETUP.md`，與現在的 IT 事件助理架構無直接對應關係。
+舊題目時期的學習沙盒（n8n prototype、Exo 分散式推論實驗）已淘汰移除，詳見 [`docs/decisions/0001-舊沙盒與實驗性資料夾清理.md`](docs/decisions/0001-舊沙盒與實驗性資料夾清理.md)。
 
 ---
 
